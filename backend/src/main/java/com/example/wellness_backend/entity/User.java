@@ -26,9 +26,6 @@ public class User {
     @Column(nullable = false, length = 20)
     private String role = "USER";
 
-    @Column(name = "is_active", nullable = false)
-    private Boolean isActive = true;
-
     public User() {
     }
 
@@ -36,10 +33,6 @@ public class User {
     public void setDefaultValues() {
         if (this.role == null) {
             this.role = "USER";
-        }
-
-        if (this.isActive == null) {
-            this.isActive = true;
         }
     }
 
@@ -63,10 +56,6 @@ public class User {
         return role;
     }
 
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -85,9 +74,5 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
     }
 }
