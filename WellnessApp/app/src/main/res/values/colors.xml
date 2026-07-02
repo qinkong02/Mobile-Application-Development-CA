@@ -1,0 +1,20 @@
+<resources>
+    <color name="teal_50">#E1F5EE</color>
+    <color name="teal_100">#9FE1CB</color>
+    <color name="teal_600">#0F6E56</color>
+    <color name="teal_800">#085041</color>
+
+    <color name="purple_50">#EEEDFE</color>
+    <color name="purple_600">#534AB7</color>
+    <color name="purple_800">#3C3489</color>
+
+    <color name="bg_page">#FAFAF8</color>
+    <color name="surface_card">#FFFFFF</color>
+
+    <color name="text_primary">#2C2C2A</color>
+    <color name="text_secondary">#5F5E5A</color>
+    <color name="text_muted">#888780</color>
+
+    <color name="border">#D3D1C7</color>
+    <color name="white">#FFFFFF</color>
+</resources>
