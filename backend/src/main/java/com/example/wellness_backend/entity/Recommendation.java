@@ -15,20 +15,21 @@ public class Recommendation {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+
     @Column(name = "recommendation_text", columnDefinition = "TEXT")
-    private String recommendationText;  // AI生成的建议文本
-
+    private String recommendationText;
+    //建议数据
     @Column(name = "avg_sleep_hours")
-    private Double avgSleepHours;  // 生成建议时的平均睡眠（记录快照）
-
+    private Double avgSleepHours;
+    //建议数据
     @Column(name = "total_exercise_minutes")
-    private Integer totalExerciseMinutes;  // 生成建议时的总运动量（快照）
+    private Integer totalExerciseMinutes;
 
     @Column(name = "generated_at")
-    private LocalDateTime generatedAt;  // 生成时间
+    private LocalDateTime generatedAt;
 
     @Column(name = "is_read")
-    private Boolean isRead = false;  // 用户是否已读
+    private Boolean isRead = false;
 
     // Getters and Setters
     public Long getId() { return id; }
