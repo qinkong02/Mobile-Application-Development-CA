@@ -23,7 +23,6 @@ public class AgentController {
     private AgentService agentService;
 
     /**
-     * 手动为指定用户生成建议
      * POST /api/agent/generate/{userId}
      */
     @PostMapping("/generate/{userId}")
