@@ -3,6 +3,7 @@ package com.example.wellness_backend.repository;
 import com.example.wellness_backend.entity.WellnessLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +13,9 @@ import java.util.Optional;
  */
 public interface WellnessLogRepository extends JpaRepository<WellnessLog, Long> {
 
-    List<WellnessLog> findByUser_IdOrderByLogDateDesc(Long userId);
+    List<WellnessLog> findByUserIdOrderByLogDateDesc(Long userId);
 
-    Optional<WellnessLog> findByIdAndUser_Id(Long id, Long userId);
+    Optional<WellnessLog> findByIdAndUserId(Long id, Long userId);
+
+    List<WellnessLog> findByUserIdAndLogDateAfter(Long userId, LocalDate logDate);
 }

@@ -1,6 +1,5 @@
 package com.example.wellness_backend.controller;
 
-import com.example.wellness_backend.dto.ApiResponse;
 import com.example.wellness_backend.entity.WellnessLog;
 import com.example.wellness_backend.service.WellnessLogService;
 import org.springframework.web.bind.annotation.*;
@@ -23,37 +22,33 @@ public class WellnessLogController {
     }
 
     @PostMapping
-    public ApiResponse<WellnessLog> createLog(@RequestBody WellnessLog log) {
+    public WellnessLog createLog(@RequestBody WellnessLog log) {
         Long userId = 1L; // temporary user id before login/JWT is finished
-        WellnessLog savedLog = wellnessLogService.createLog(userId, log);
-        return ApiResponse.success("Wellness log created successfully", savedLog);
+        return wellnessLogService.createLog(userId, log);
     }
 
     @GetMapping
-    public ApiResponse<List<WellnessLog>> getAllLogs() {
+    public List<WellnessLog> getAllLogs() {
         Long userId = 1L;
-        List<WellnessLog> logs = wellnessLogService.getAllLogs(userId);
-        return ApiResponse.success(logs);
+        return wellnessLogService.getAllLogs(userId);
     }
 
     @GetMapping("/{id}")
-    public ApiResponse<WellnessLog> getOneLog(@PathVariable Long id) {
+    public WellnessLog getOneLog(@PathVariable Long id) {
         Long userId = 1L;
-        WellnessLog log = wellnessLogService.getLogById(userId, id);
-        return ApiResponse.success(log);
+        return wellnessLogService.getLogById(userId, id);
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<WellnessLog> updateLog(@PathVariable Long id, @RequestBody WellnessLog log) {
+    public WellnessLog updateLog(@PathVariable Long id, @RequestBody WellnessLog log) {
         Long userId = 1L;
-        WellnessLog updatedLog = wellnessLogService.updateLog(userId, id, log);
-        return ApiResponse.success("Wellness log updated successfully", updatedLog);
+        return wellnessLogService.updateLog(userId, id, log);
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse<String> deleteLog(@PathVariable Long id) {
+    public String deleteLog(@PathVariable Long id) {
         Long userId = 1L;
         wellnessLogService.deleteLog(userId, id);
-        return ApiResponse.success("Wellness log deleted successfully", "Deleted successfully");
+        return "Deleted successfully";
     }
 }

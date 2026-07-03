@@ -1,8 +1,6 @@
 package com.example.wellness_backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -18,10 +16,7 @@ public class WellnessLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Long userId;
 
     private LocalDate logDate;
 
@@ -48,6 +43,10 @@ public class WellnessLog {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
 
+        if (userId == null) {
+            userId = 1L;
+        }
+
         if (logDate == null) {
             logDate = LocalDate.now();
         }
@@ -62,15 +61,8 @@ public class WellnessLog {
         return id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public Long getUserId() {
-        if (user == null) {
-            return null;
-        }
-        return user.getId();
+        return userId;
     }
 
     public LocalDate getLogDate() {
@@ -109,8 +101,8 @@ public class WellnessLog {
         this.id = id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setLogDate(LocalDate logDate) {
