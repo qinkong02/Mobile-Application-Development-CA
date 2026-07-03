@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">健康助手</string>
+
+    <string name="add_record_title">记录健康数据</string>
+    <string name="record_type_label">记录类型</string>
+    <string name="record_type_sleep">睡眠</string>
+    <string name="record_type_exercise">运动</string>
+    <string name="sleep_duration_label">睡眠时长（小时）</string>
+    <string name="sleep_duration_hint">7.5</string>
+    <string name="date_label">日期</string>
+    <string name="date_hint">2026-07-01</string>
+    <string name="note_label">备注</string>
+    <string name="note_hint">选填</string>
+    <string name="save_record">保存记录</string>
+
+    <string name="email_label">邮箱</string>
+    <string name="email_hint">name@example.com</string>
+    <string name="password_label">密码</string>
+    <string name="password_dots_hint">••••••••</string>
+
+    <string name="welcome_back">欢迎回来</string>
+    <string name="login_subtitle">登录以查看你的健康数据</string>
+    <string name="login_button">登录</string>
+    <string name="go_register_prompt">还没有账号？立即注册</string>
+
+    <string name="create_account_title">创建账号</string>
+    <string name="register_subtitle">开启你的健康管理之旅</string>
+    <string name="name_label">姓名</string>
+    <string name="name_hint">张三</string>
+    <string name="confirm_password_label">确认密码</string>
+    <string name="register_button">注册</string>
+
+    <string name="default_greeting">你好</string>
+    <string name="ai_suggestion_title">AI 健康建议</string>
+    <string name="loading_suggestion">正在加载建议...</string>
+    <string name="quick_entry_title">快捷入口</string>
+    <string name="quick_entry_record">记录数据</string>
+    <string name="quick_entry_chat">AI 聊天</string>
+
+    <string name="chat_input_hint">输入你的问题</string>
+
+    <string name="logout_button">退出登录</string>
+
+    <string name="weekly_trend_title">本周趋势分析</string>
+    <string name="loading_summary">正在加载...</string>
+    <string name="regenerate_button">重新生成建议</string>
+</resources>

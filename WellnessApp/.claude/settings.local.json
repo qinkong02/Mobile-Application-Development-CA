@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ide__getDiagnostics",
+      "PowerShell(where.exe gradle 2>$null; where.exe java 2>$null; $env:JAVA_HOME; $env:ANDROID_HOME; $env:ANDROID_SDK_ROOT)"
+    ]
+  }
+}
