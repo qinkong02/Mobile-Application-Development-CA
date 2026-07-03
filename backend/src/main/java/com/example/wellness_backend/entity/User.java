@@ -1,9 +1,13 @@
 package com.example.wellness_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Author: MO YUNDI
+ * Author: MO YUNDI / Boliang Wang
  * Entity class for application users.
  */
 @Entity
@@ -25,6 +29,10 @@ public class User {
 
     @Column(nullable = false, length = 20)
     private String role = "USER";
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WellnessLog> wellnessLogs = new ArrayList<>();
 
     public User() {
     }
@@ -56,6 +64,10 @@ public class User {
         return role;
     }
 
+    public List<WellnessLog> getWellnessLogs() {
+        return wellnessLogs;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -74,5 +86,9 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setWellnessLogs(List<WellnessLog> wellnessLogs) {
+        this.wellnessLogs = wellnessLogs;
     }
 }
