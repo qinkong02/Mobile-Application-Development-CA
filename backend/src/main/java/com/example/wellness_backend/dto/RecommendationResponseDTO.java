@@ -1,42 +1,35 @@
-package com.example.wellness_backend.entity;
+package com.example.wellness_backend.dto;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
-//此类用于对应储存ai给过的建议的表
-@Entity
-@Table(name = "recommendations")
-public class Recommendation {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//返回给前端的agent建议
+public class RecommendationResponseDTO {
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-
-    @Column(name = "recommendation_text", columnDefinition = "TEXT")
+    private Long userId;
     private String recommendationText;
-    //建议数据
-    @Column(name = "avg_sleep_hours")
     private Double avgSleepHours;
-    //建议数据
-    @Column(name = "total_exercise_minutes")
     private Integer totalExerciseMinutes;
-
-    @Column(name = "generated_at")
     private LocalDateTime generatedAt;
+    private Boolean isRead;
 
-    @Column(name = "is_read")
-    private Boolean isRead = false;
+    public RecommendationResponseDTO() {}
+
+    public RecommendationResponseDTO(Long id, Long userId, String recommendationText,
+                                     Double avgSleepHours, Integer totalExerciseMinutes,
+                                     LocalDateTime generatedAt, Boolean isRead) {
+        this.id = id;
+        this.userId = userId;
+        this.recommendationText = recommendationText;
+        this.avgSleepHours = avgSleepHours;
+        this.totalExerciseMinutes = totalExerciseMinutes;
+        this.generatedAt = generatedAt;
+        this.isRead = isRead;
+    }
 
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
     public String getRecommendationText() { return recommendationText; }
     public void setRecommendationText(String recommendationText) { this.recommendationText = recommendationText; }
     public Double getAvgSleepHours() { return avgSleepHours; }
