@@ -13,9 +13,9 @@ import java.util.Optional;
  */
 public interface WellnessLogRepository extends JpaRepository<WellnessLog, Long> {
 
-    List<WellnessLog> findByUserIdOrderByLogDateDesc(Long userId);
+    List<WellnessLog> findByUser_IdOrderByLogDateDesc(Long userId);
 
-    Optional<WellnessLog> findByIdAndUserId(Long id, Long userId);
+    Optional<WellnessLog> findByIdAndUser_Id(Long id, Long userId);
 
-    List<WellnessLog> findByUserIdAndLogDateAfter(Long userId, LocalDate logDate);
+    List<WellnessLog> findByUser_IdAndLogDateAfter(Long userId, LocalDate logDate);
 }

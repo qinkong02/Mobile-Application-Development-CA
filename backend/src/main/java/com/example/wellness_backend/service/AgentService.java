@@ -44,7 +44,7 @@ public class AgentService {
 
         LocalDate sevenDaysAgo = LocalDate.now().minusDays(7);
         List<WellnessLog> records = wellnessLogRepository
-                .findByUserIdAndLogDateAfter(user.getId(), sevenDaysAgo);
+                .findByUser_IdAndLogDateAfter(user.getId(), sevenDaysAgo);
 
         if (records.isEmpty()) {
             throw new RuntimeException("近7天没有健康记录，请先录入数据");
