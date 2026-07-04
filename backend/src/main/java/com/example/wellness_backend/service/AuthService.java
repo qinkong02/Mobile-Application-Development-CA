@@ -3,15 +3,10 @@ package com.example.wellness_backend.service;
 import com.example.wellness_backend.dto.AuthResponse;
 import com.example.wellness_backend.dto.LoginRequest;
 import com.example.wellness_backend.dto.RegisterRequest;
-import com.example.wellness_backend.dto.UserResponse;
 import com.example.wellness_backend.entity.User;
 import com.example.wellness_backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-/**
- * Author: MO YUNDI
- * Service class for user authentication logic.
- */
 @Service
 public class AuthService {
 
@@ -22,12 +17,13 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
+
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("Username already exists");
+            throw new IllegalArgumentException("Username already exists");
         }
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new IllegalArgumentException("Email already exists");
         }
 
         User user = new User();
@@ -38,26 +34,18 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
-        return new AuthResponse(toUserResponse(savedUser));
+        return new AuthResponse(savedUser);
     }
 
     public AuthResponse login(LoginRequest request) {
+
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("Invalid username or password"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
 
         if (!user.getPassword().equals(request.getPassword())) {
-            throw new RuntimeException("Invalid username or password");
+            throw new IllegalArgumentException("Invalid username or password");
         }
 
-        return new AuthResponse(toUserResponse(user));
-    }
-
-    private UserResponse toUserResponse(User user) {
-        return new UserResponse(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getRole()
-        );
+        return new AuthResponse(user);
     }
 }

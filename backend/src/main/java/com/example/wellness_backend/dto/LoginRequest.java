@@ -2,9 +2,6 @@ package com.example.wellness_backend.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-/**
- * DTO for user login request.
- */
 public class LoginRequest {
 
     @NotBlank(message = "Username is required")
@@ -14,6 +11,11 @@ public class LoginRequest {
     private String password;
 
     public LoginRequest() {
+    }
+
+    public LoginRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
