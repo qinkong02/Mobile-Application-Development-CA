@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.nusiss.wellness.data.model.WellnessLog
 
 class AddRecordActivity : AppCompatActivity() {
 
@@ -61,19 +62,22 @@ class AddRecordActivity : AppCompatActivity() {
             return
         }
 
-        val unit = if (selectedType == "SLEEP") "小时" else "分钟"
-        val record = WellnessRecord(
-            type = selectedType,
-            value = value,
-            unit = unit,
-            recordDate = date,
-            note = note.ifEmpty { null }
-        )
+        val log = if (selectedType == "SLEEP") {
+            WellnessLog(logDate = date, sleepHours = value, moodScore = 5, notes = note.ifEmpty { null })
+        } else {
+            WellnessLog(
+                logDate = date,
+                exerciseType = note.ifEmpty { "运动" },  // 备注暂当运动类型用
+                exerciseMinutes = value.toInt(),
+                moodScore = 5,
+                notes = note.ifEmpty { null }
+            )
+        }
 
         binding.btnSave.isEnabled = false
         lifecycleScope.launch {
             try {
-                val response = RetrofitClient.api.addRecord(record)
+                val response = RetrofitClient.api.addRecord(log)
                 if (response.isSuccessful) {
                     Toast.makeText(this@AddRecordActivity, "记录已保存", Toast.LENGTH_SHORT).show()
                     finish()

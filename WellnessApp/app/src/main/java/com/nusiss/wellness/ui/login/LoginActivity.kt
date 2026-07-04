@@ -49,6 +49,12 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
+// TODO: 临时旁路,后端登录接口完成后删除
+        if (email == "test") {
+            goToHome()
+            return
+        }
+
         binding.btnLogin.isEnabled = false
         lifecycleScope.launch {
             try {

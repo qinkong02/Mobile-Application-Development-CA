@@ -17,7 +17,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // 后端地址：Android模拟器访问本机后端要用 10.0.2.2，真机测试请改成电脑的局域网IP，例如 "http://192.168.1.5:8080/"
-        buildConfigField "String", "BASE_URL", '"http://localhost:8080/"'
+        buildConfigField "String", "BASE_URL", '"http://192.168.0.14:8080/"'
     }
 
     buildTypes {

@@ -13,15 +13,15 @@ interface ApiService {
     @POST("api/auth/register")
     suspend fun register(@Body request: RegisterRequest): Response<AuthResponse>
 
-    // ---------- 健康记录 ----------
-    @GET("api/records")
-    suspend fun getRecords(): Response<List<WellnessRecord>>
+    // ---------- 健康记录(对接后端 /api/wellness)----------
+    @GET("api/wellness")
+    suspend fun getRecords(): Response<ApiResponse<List<WellnessLog>>>
 
-    @POST("api/records")
-    suspend fun addRecord(@Body record: WellnessRecord): Response<WellnessRecord>
+    @POST("api/wellness")
+    suspend fun addRecord(@Body log: WellnessLog): Response<ApiResponse<WellnessLog>>
 
-    @DELETE("api/records/{id}")
-    suspend fun deleteRecord(@Path("id") id: String): Response<Unit>
+    @DELETE("api/wellness/{id}")
+    suspend fun deleteRecord(@Path("id") id: Long): Response<ApiResponse<String>>
 
     // ---------- 聊天机器人 ----------
     @POST("api/chat")

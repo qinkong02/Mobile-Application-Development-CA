@@ -13,6 +13,7 @@ import com.nusiss.wellness.data.api.RetrofitClient
 import com.nusiss.wellness.databinding.FragmentRecordsBinding
 import com.nusiss.wellness.ui.entry.AddRecordActivity
 import kotlinx.coroutines.launch
+import com.nusiss.wellness.data.model.WellnessRecord
 
 class RecordsFragment : Fragment() {
 
@@ -56,8 +57,19 @@ class RecordsFragment : Fragment() {
                 val response = RetrofitClient.api.getRecords()
                 if (_binding == null) return@launch
                 if (response.isSuccessful && response.body() != null) {
-                    adapter.updateData(response.body()!!)
-                } else {
+                    val logs = response.body()!!.data.orEmpty()
+                    val records = logs.flatMap { log ->
+                        buildList {
+                            log.sleepHours?.let {
+                                add(WellnessRecord(log.id?.toString(), "SLEEP", it, "小时", log.logDate, log.notes))
+                            }
+                            log.exerciseMinutes?.let {
+                                add(WellnessRecord(log.id?.toString(), "EXERCISE", it.toDouble(), "分钟", log.logDate, log.exerciseType))
+                            }
+                        }
+                    }
+                    adapter.updateData(records)
+                }else {
                     Toast.makeText(requireContext(), "加载记录失败", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
