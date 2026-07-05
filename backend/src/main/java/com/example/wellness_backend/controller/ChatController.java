@@ -19,7 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+<<<<<<< HEAD
  * @author XieMaonan
+=======
+ * @author XieMaonan ZhengChaorui
+>>>>>>> c1de0f9 (feat(chatbot): add loading state, multi-turn context, and dev setup)
  */
 @RestController
 @RequestMapping("/api/chat")
