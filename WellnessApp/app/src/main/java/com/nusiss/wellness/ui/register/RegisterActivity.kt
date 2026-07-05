@@ -25,12 +25,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun doRegister() {
-        val name = binding.etName.text.toString().trim()
+        val username = binding.etUsername.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
         val confirm = binding.etConfirmPassword.text.toString().trim()
 
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "请完整填写信息", Toast.LENGTH_SHORT).show()
             return
         }
@@ -42,15 +42,16 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnRegister.isEnabled = false
         lifecycleScope.launch {
             try {
-                val response = RetrofitClient.api.register(RegisterRequest(name, email, password))
-                if (response.isSuccessful && response.body() != null) {
-                    val body = response.body()!!
-                    TokenManager.saveToken(body.token)
-                    TokenManager.saveUser(body.userId, body.userName)
+                val response = RetrofitClient.api.register(RegisterRequest(username, email, password))
+                val body = response.body()
+                val data = body?.data
+                if (response.isSuccessful && body?.success == true && data != null) {
+                    TokenManager.saveToken(data.token)
+                    TokenManager.saveUser(data.user.id.toString(), data.user.username)
                     startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                     finish()
                 } else {
-                    Toast.makeText(this@RegisterActivity, "注册失败，请稍后重试", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegisterActivity, body?.message ?: "注册失败，请稍后重试", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 Toast.makeText(this@RegisterActivity, "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()

@@ -21,45 +21,34 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request) {
 
-        String username = request.getUsername().trim();
-        String email = request.getEmail().trim();
-        String password = request.getPassword();
-
-        if (userRepository.existsByUsername(username)) {
+        if (userRepository.existsByUsername(request.getUsername())) {
             throw new IllegalArgumentException("Username already exists");
         }
 
-        if (userRepository.existsByEmail(email)) {
+        if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email already exists");
         }
 
         User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(password);
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
         user.setRole("USER");
 
         User savedUser = userRepository.save(user);
 
-        String token = jwtUtils.generateToken(savedUser.getId());
-
-        return new AuthResponse(savedUser, token);
+        return new AuthResponse(savedUser, jwtUtils.generateToken(savedUser.getId()));
     }
 
     public AuthResponse login(LoginRequest request) {
 
-        String username = request.getUsername().trim();
-        String password = request.getPassword();
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("Username does not exist"));
-
-        if (!user.getPassword().equals(password)) {
-            throw new IllegalArgumentException("Password is incorrect");
+        if (!user.getPassword().equals(request.getPassword())) {
+            throw new IllegalArgumentException("Invalid username or password");
         }
 
-        String token = jwtUtils.generateToken(user.getId());
-
-        return new AuthResponse(user, token);
+        return new AuthResponse(user, jwtUtils.generateToken(user.getId()));
     }
 }

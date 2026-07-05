@@ -8,10 +8,10 @@ interface ApiService {
 
     // ---------- 认证 ----------
     @POST("api/auth/login")
-    suspend fun login(@Body request: LoginRequest): Response<AuthResponse>
+    suspend fun login(@Body request: LoginRequest): Response<ApiResponse<AuthResponse>>
 
     @POST("api/auth/register")
-    suspend fun register(@Body request: RegisterRequest): Response<AuthResponse>
+    suspend fun register(@Body request: RegisterRequest): Response<ApiResponse<AuthResponse>>
 
     // ---------- 健康记录(对接后端 /api/wellness)----------
     @GET("api/wellness")
@@ -26,6 +26,12 @@ interface ApiService {
     // ---------- 聊天机器人 ----------
     @POST("api/chat")
     suspend fun sendChatMessage(@Body request: ChatRequest): Response<ChatResponse>
+
+    // added by XieMaonan：原来没有拉取历史记录的接口，聊天记录只存在前端本地，
+    // Fragment 一销毁就丢失。新增这个接口配合 ChatViewModel 在页面重建/App 重启时
+    // 从后端恢复历史记录。
+    @GET("api/chat/history")
+    suspend fun getChatHistory(): Response<ApiResponse<List<ChatHistoryItem>>>
 
     // ---------- Agentic AI 健康建议 ----------
     @POST("api/recommendations/generate")

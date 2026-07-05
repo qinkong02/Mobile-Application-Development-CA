@@ -13,6 +13,15 @@
     <string name="note_hint">选填</string>
     <string name="save_record">保存记录</string>
 
+    <string name="exercise_type_label">运动类型</string>
+    <string name="exercise_type_running">跑步</string>
+    <string name="exercise_type_yoga">瑜伽</string>
+    <string name="exercise_type_swimming">游泳</string>
+    <string name="exercise_type_gym">健身</string>
+    <string name="exercise_type_other">其他</string>
+
+    <string name="username_label">用户名</string>
+    <string name="username_hint">请输入用户名</string>
     <string name="email_label">邮箱</string>
     <string name="email_hint">name@example.com</string>
     <string name="password_label">密码</string>
@@ -25,8 +34,6 @@
 
     <string name="create_account_title">创建账号</string>
     <string name="register_subtitle">开启你的健康管理之旅</string>
-    <string name="name_label">姓名</string>
-    <string name="name_hint">张三</string>
     <string name="confirm_password_label">确认密码</string>
     <string name="register_button">注册</string>
 

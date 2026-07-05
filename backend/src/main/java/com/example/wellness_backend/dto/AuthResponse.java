@@ -8,14 +8,12 @@ public class AuthResponse {
     private String token;
 
     public AuthResponse(User user, String token) {
-        this.user = new UserInfo(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getRole()
-        );
+        this.user = new UserInfo(user.getId(), user.getUsername(), user.getEmail(), user.getRole());
         this.token = token;
     }
+
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 
     public UserInfo getUser() {
         return user;
@@ -23,14 +21,6 @@ public class AuthResponse {
 
     public void setUser(UserInfo user) {
         this.user = user;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public static class UserInfo {

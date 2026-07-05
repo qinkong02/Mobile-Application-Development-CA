@@ -39,16 +39,16 @@
             android:textSize="13sp"
             android:textColor="@color/text_secondary" />
 
-        <TextView style="@style/FieldLabel" android:layout_width="match_parent" android:text="@string/email_label" />
+        <TextView style="@style/FieldLabel" android:layout_width="match_parent" android:text="@string/username_label" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_input"
-            android:hint="@string/email_hint"
-            android:inputType="textEmailAddress"
-            android:autofillHints="emailAddress"
+            android:hint="@string/username_hint"
+            android:inputType="text"
+            android:autofillHints="username"
             android:textSize="14sp"
             android:layout_marginBottom="14dp" />
 

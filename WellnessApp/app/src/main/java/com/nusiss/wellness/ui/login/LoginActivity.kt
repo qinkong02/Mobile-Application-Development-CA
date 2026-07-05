@@ -41,31 +41,26 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun doLogin() {
-        val email = binding.etEmail.text.toString().trim()
+        val username = binding.etUsername.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "请输入邮箱和密码", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-// TODO: 临时旁路,后端登录接口完成后删除
-        if (email == "test") {
-            goToHome()
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_SHORT).show()
             return
         }
 
         binding.btnLogin.isEnabled = false
         lifecycleScope.launch {
             try {
-                val response = RetrofitClient.api.login(LoginRequest(email, password))
-                if (response.isSuccessful && response.body() != null) {
-                    val body = response.body()!!
-                    TokenManager.saveToken(body.token)
-                    TokenManager.saveUser(body.userId, body.userName)
+                val response = RetrofitClient.api.login(LoginRequest(username, password))
+                val body = response.body()
+                val data = body?.data
+                if (response.isSuccessful && body?.success == true && data != null) {
+                    TokenManager.saveToken(data.token)
+                    TokenManager.saveUser(data.user.id.toString(), data.user.username)
                     goToHome()
                 } else {
-                    Toast.makeText(this@LoginActivity, "登录失败，请检查邮箱或密码", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, body?.message ?: "登录失败，请检查用户名或密码", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 Toast.makeText(this@LoginActivity, "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()
@@ -74,7 +69,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun goToHome() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
