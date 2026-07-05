@@ -45,6 +45,7 @@
     <string name="quick_entry_chat">AI 聊天</string>
 
     <string name="chat_input_hint">输入你的问题</string>
+    <string name="chat_thinking">正在思考…</string>
 
     <string name="logout_button">退出登录</string>
 

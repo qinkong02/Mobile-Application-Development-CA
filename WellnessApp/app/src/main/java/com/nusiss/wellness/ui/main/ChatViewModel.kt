@@ -15,6 +15,7 @@ class ChatViewModel : ViewModel() {
     val messages = mutableListOf<ChatMessage>()
     var historyLoaded = false
         private set
+    var isSending = false
 
     fun loadHistory(onLoaded: () -> Unit) {
         if (historyLoaded) {

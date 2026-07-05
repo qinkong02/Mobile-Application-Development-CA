@@ -52,6 +52,7 @@ class ChatFragment : Fragment() {
         }
 
         binding.btnSend.setOnClickListener { sendMessage() }
+        setSending(viewModel.isSending)
     }
 
     private fun scrollToBottom() {
@@ -62,25 +63,52 @@ class ChatFragment : Fragment() {
 
     private fun sendMessage() {
         val text = binding.etMessage.text.toString().trim()
-        if (text.isEmpty()) return
+        if (text.isEmpty() || viewModel.isSending) return
 
         viewModel.messages.add(ChatMessage(text, isUser = true))
         adapter.notifyItemInserted(viewModel.messages.size - 1)
+
+        val loadingIndex = viewModel.messages.size
+        viewModel.messages.add(ChatMessage("", isUser = false, isLoading = true))
+        adapter.notifyItemInserted(loadingIndex)
+
         scrollToBottom()
         binding.etMessage.text?.clear()
+        setSending(true)
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val reply = viewModel.sendMessage(text)
                 if (_binding == null) return@launch
+                removeLoadingMessage(loadingIndex)
                 viewModel.messages.add(ChatMessage(reply, isUser = false))
                 adapter.notifyItemInserted(viewModel.messages.size - 1)
                 scrollToBottom()
             } catch (e: Exception) {
                 if (_binding == null) return@launch
+                removeLoadingMessage(loadingIndex)
                 Toast.makeText(requireContext(), "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()
+            } finally {
+                if (_binding != null) {
+                    setSending(false)
+                } else {
+                    viewModel.isSending = false
+                }
             }
         }
+    }
+
+    private fun removeLoadingMessage(index: Int) {
+        if (index in viewModel.messages.indices && viewModel.messages[index].isLoading) {
+            viewModel.messages.removeAt(index)
+            adapter.notifyItemRemoved(index)
+        }
+    }
+
+    private fun setSending(sending: Boolean) {
+        viewModel.isSending = sending
+        binding.btnSend.isEnabled = !sending
+        binding.etMessage.isEnabled = !sending
     }
 
     override fun onDestroyView() {

@@ -2,7 +2,9 @@ package com.nusiss.wellness.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.nusiss.wellness.R
 import com.nusiss.wellness.data.model.ChatMessage
 import com.nusiss.wellness.databinding.ItemChatBotBinding
 import com.nusiss.wellness.databinding.ItemChatUserBinding
@@ -32,7 +34,20 @@ class ChatAdapter(private val items: List<ChatMessage>) :
         val item = items[position]
         when (holder) {
             is UserHolder -> holder.binding.tvMessage.text = item.text
-            is BotHolder -> holder.binding.tvMessage.text = item.text
+            is BotHolder -> {
+                val context = holder.binding.root.context
+                if (item.isLoading) {
+                    holder.binding.tvMessage.text = context.getString(R.string.chat_thinking)
+                    holder.binding.tvMessage.setTextColor(
+                        ContextCompat.getColor(context, R.color.text_secondary)
+                    )
+                } else {
+                    holder.binding.tvMessage.text = item.text
+                    holder.binding.tvMessage.setTextColor(
+                        ContextCompat.getColor(context, R.color.text_primary)
+                    )
+                }
+            }
         }
     }
 
