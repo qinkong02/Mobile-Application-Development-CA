@@ -6,20 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nusiss.wellness.data.api.RetrofitClient
 import com.nusiss.wellness.data.model.ChatMessage
-import com.nusiss.wellness.data.model.ChatRequest
 import com.nusiss.wellness.databinding.FragmentChatBinding
 import kotlinx.coroutines.launch
 
+// bug fix by XieMaonan：原实现把 messages 列表存成 ChatFragment 的本地成员变量，
+// 而 MainActivity 切换底部导航时是用 replace() 整个销毁重建 Fragment 的，
+// 导致每次切走再切回聊天页，本地变量被清空、聊天记录全部消失。
+// 这里改为从 ChatViewModel 读取消息列表——ViewModel 的生命周期跨越 Fragment
+// 销毁重建，配合后端的历史记录接口即可修复该问题。
 class ChatFragment : Fragment() {
 
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
 
-    private val messages = mutableListOf<ChatMessage>()
+    private val viewModel: ChatViewModel by viewModels()
     private lateinit var adapter: ChatAdapter
 
     override fun onCreateView(
@@ -32,35 +36,46 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        messages.add(ChatMessage("你好，我可以帮你分析睡眠、运动数据，或者回答健康问题", isUser = false))
-        adapter = ChatAdapter(messages)
+        adapter = ChatAdapter(viewModel.messages)
         binding.rvChat.layoutManager = LinearLayoutManager(requireContext())
         binding.rvChat.adapter = adapter
 
+        if (viewModel.historyLoaded) {
+            adapter.notifyDataSetChanged()
+            scrollToBottom()
+        } else {
+            viewModel.loadHistory {
+                if (_binding == null) return@loadHistory
+                adapter.notifyDataSetChanged()
+                scrollToBottom()
+            }
+        }
+
         binding.btnSend.setOnClickListener { sendMessage() }
+    }
+
+    private fun scrollToBottom() {
+        if (viewModel.messages.isNotEmpty()) {
+            binding.rvChat.scrollToPosition(viewModel.messages.size - 1)
+        }
     }
 
     private fun sendMessage() {
         val text = binding.etMessage.text.toString().trim()
         if (text.isEmpty()) return
 
-        messages.add(ChatMessage(text, isUser = true))
-        adapter.notifyItemInserted(messages.size - 1)
-        binding.rvChat.scrollToPosition(messages.size - 1)
+        viewModel.messages.add(ChatMessage(text, isUser = true))
+        adapter.notifyItemInserted(viewModel.messages.size - 1)
+        scrollToBottom()
         binding.etMessage.text?.clear()
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val response = RetrofitClient.api.sendChatMessage(ChatRequest(text))
+                val reply = viewModel.sendMessage(text)
                 if (_binding == null) return@launch
-                val reply = if (response.isSuccessful && response.body() != null) {
-                    response.body()!!.reply
-                } else {
-                    "抱歉，暂时无法回复，请稍后重试"
-                }
-                messages.add(ChatMessage(reply, isUser = false))
-                adapter.notifyItemInserted(messages.size - 1)
-                binding.rvChat.scrollToPosition(messages.size - 1)
+                viewModel.messages.add(ChatMessage(reply, isUser = false))
+                adapter.notifyItemInserted(viewModel.messages.size - 1)
+                scrollToBottom()
             } catch (e: Exception) {
                 if (_binding == null) return@launch
                 Toast.makeText(requireContext(), "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()

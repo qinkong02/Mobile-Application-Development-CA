@@ -1,10 +1,18 @@
 package com.example.wellness_backend.service;
 
+import com.example.wellness_backend.dto.ChatHistoryItemDTO;
+import com.example.wellness_backend.entity.ChatMessage;
+import com.example.wellness_backend.entity.User;
+import com.example.wellness_backend.repository.ChatMessageRepository;
+import com.example.wellness_backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author XieMaonan
@@ -20,10 +28,19 @@ public class ChatService {
     @Autowired
     private ChatClient chatClient;
 
-    public String reply(String message) {
+    @Autowired
+    private ChatMessageRepository chatMessageRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public String reply(Long userId, String message) {
         if (message == null || message.trim().isEmpty()) {
             throw new RuntimeException("消息不能为空");
         }
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("用户不存在"));
 
         logger.info("收到聊天消息: {}", message);
 
@@ -35,6 +52,15 @@ public class ChatService {
 
         logger.info("AI回复: {}", reply);
 
+        chatMessageRepository.save(new ChatMessage(user, "user", message));
+        chatMessageRepository.save(new ChatMessage(user, "bot", reply));
+
         return reply;
+    }
+
+    public List<ChatHistoryItemDTO> getHistory(Long userId) {
+        return chatMessageRepository.findByUser_IdOrderByCreatedAtAsc(userId).stream()
+                .map(m -> new ChatHistoryItemDTO(m.getRole(), m.getContent(), m.getCreatedAt()))
+                .collect(Collectors.toList());
     }
 }

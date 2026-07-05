@@ -3,6 +3,7 @@ package com.example.wellness_backend.controller;
 import com.example.wellness_backend.dto.RecommendationResponseDTO;
 import com.example.wellness_backend.entity.Recommendation;
 import com.example.wellness_backend.service.AgentService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,17 @@ public class AgentController {
     private AgentService agentService;
 
     /**
+     * 手动为指定用户生成建议
      * POST /api/agent/generate/{userId}
      */
-    @PostMapping("/generate/{userId}")
+    @PostMapping("/generate")
     public ResponseEntity<ApiResponse<RecommendationResponseDTO>> generateRecommendation(
-            @PathVariable Long userId) {
+            HttpServletRequest request) {
         try {
-            logger.info("收到生成建议请求，userId={}", userId);
+            Long currentUserId = (Long) request.getAttribute("currentUserId");
+            logger.info("收到生成建议请求，userId={}", currentUserId);
 
-            Recommendation recommendation = agentService.generateRecommendationForUser(userId);
+            Recommendation recommendation = agentService.generateRecommendationForUser(currentUserId);
 
             RecommendationResponseDTO dto = new RecommendationResponseDTO(
                     recommendation.getId(),
