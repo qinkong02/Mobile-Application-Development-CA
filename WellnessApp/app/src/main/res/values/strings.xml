@@ -13,6 +13,13 @@
     <string name="note_hint">选填</string>
     <string name="save_record">保存记录</string>
 
+    <string name="exercise_type_label">运动类型</string>
+    <string name="exercise_type_running">跑步</string>
+    <string name="exercise_type_yoga">瑜伽</string>
+    <string name="exercise_type_swimming">游泳</string>
+    <string name="exercise_type_gym">健身</string>
+    <string name="exercise_type_other">其他</string>
+
     <string name="username_label">用户名</string>
     <string name="username_hint">请输入用户名</string>
     <string name="email_label">邮箱</string>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,7 +32,7 @@ class RecordsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = RecordsAdapter(emptyList())
+        adapter = RecordsAdapter(emptyList()) { record -> confirmDelete(record) }
         binding.rvRecords.layoutManager = LinearLayoutManager(requireContext())
         binding.rvRecords.adapter = adapter
 
@@ -64,7 +65,7 @@ class RecordsFragment : Fragment() {
                                 add(WellnessRecord(log.id?.toString(), "SLEEP", it, "小时", log.logDate, log.notes))
                             }
                             log.exerciseMinutes?.let {
-                                add(WellnessRecord(log.id?.toString(), "EXERCISE", it.toDouble(), "分钟", log.logDate, log.exerciseType))
+                                add(WellnessRecord(log.id?.toString(), "EXERCISE", it.toDouble(), "分钟", log.logDate, log.notes, log.exerciseType))
                             }
                         }
                     }
@@ -79,6 +80,38 @@ class RecordsFragment : Fragment() {
                 if (_binding != null) {
                     binding.swipeRefresh.isRefreshing = false
                 }
+            }
+        }
+    }
+
+    private fun confirmDelete(record: WellnessRecord) {
+        val id = record.id?.toLongOrNull()
+        if (id == null) {
+            Toast.makeText(requireContext(), "记录ID无效，无法删除", Toast.LENGTH_SHORT).show()
+            return
+        }
+        AlertDialog.Builder(requireContext())
+            .setTitle("删除记录")
+            .setMessage("确定要删除这条记录吗？")
+            .setPositiveButton("删除") { _, _ -> deleteRecord(id) }
+            .setNegativeButton("取消", null)
+            .show()
+    }
+
+    private fun deleteRecord(id: Long) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.api.deleteRecord(id)
+                if (_binding == null) return@launch
+                if (response.isSuccessful) {
+                    Toast.makeText(requireContext(), "删除成功", Toast.LENGTH_SHORT).show()
+                    loadRecords()
+                } else {
+                    Toast.makeText(requireContext(), "删除失败，请重试", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                if (_binding == null) return@launch
+                Toast.makeText(requireContext(), "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

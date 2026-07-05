@@ -36,6 +36,14 @@
             android:layout_height="wrap_content"
             android:textSize="11sp"
             android:textColor="@color/text_secondary" />
+
+        <TextView
+            android:id="@+id/tvNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="@color/text_muted"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

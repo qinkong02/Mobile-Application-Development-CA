@@ -1,8 +1,11 @@
 package com.nusiss.wellness.ui.entry
 
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.nusiss.wellness.R
 import com.nusiss.wellness.data.api.RetrofitClient
@@ -18,6 +21,8 @@ class AddRecordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddRecordBinding
     private var selectedType = "SLEEP"
+    private var selectedExerciseType = "跑步"
+    private lateinit var exerciseTypeChips: List<TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +30,17 @@ class AddRecordActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.etDate.setText(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date()))
+
+        exerciseTypeChips = listOf(
+            binding.chipExerciseRunning,
+            binding.chipExerciseYoga,
+            binding.chipExerciseSwimming,
+            binding.chipExerciseGym,
+            binding.chipExerciseOther
+        )
+        exerciseTypeChips.forEach { chip ->
+            chip.setOnClickListener { selectExerciseType(chip.text.toString()) }
+        }
 
         selectType("SLEEP")
         binding.chipSleep.setOnClickListener { selectType("SLEEP") }
@@ -44,6 +60,25 @@ class AddRecordActivity : AppCompatActivity() {
             if (!isSleep) R.drawable.bg_pill_accent else R.drawable.bg_pill_outline
         )
         binding.tvValueLabel.text = if (isSleep) "睡眠时长（小时）" else "运动时长（分钟）"
+
+        binding.tvExerciseTypeLabel.visibility = if (isSleep) View.GONE else View.VISIBLE
+        binding.scrollExerciseType.visibility = if (isSleep) View.GONE else View.VISIBLE
+        if (!isSleep) {
+            selectExerciseType(selectedExerciseType)
+        }
+    }
+
+    private fun selectExerciseType(type: String) {
+        selectedExerciseType = type
+        exerciseTypeChips.forEach { chip ->
+            val isSelected = chip.text.toString() == type
+            chip.setBackgroundResource(
+                if (isSelected) R.drawable.bg_pill_accent else R.drawable.bg_pill_outline
+            )
+            chip.setTextColor(
+                ContextCompat.getColor(this, if (isSelected) R.color.teal_800 else R.color.text_secondary)
+            )
+        }
     }
 
     private fun saveRecord() {
@@ -67,7 +102,7 @@ class AddRecordActivity : AppCompatActivity() {
         } else {
             WellnessLog(
                 logDate = date,
-                exerciseType = note.ifEmpty { "运动" },  // 备注暂当运动类型用
+                exerciseType = selectedExerciseType,
                 exerciseMinutes = value.toInt(),
                 moodScore = 5,
                 notes = note.ifEmpty { null }
