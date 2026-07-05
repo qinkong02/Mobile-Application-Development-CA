@@ -3,14 +3,11 @@ package com.example.wellness_backend.controller;
 import com.example.wellness_backend.dto.ApiResponse;
 import com.example.wellness_backend.entity.WellnessLog;
 import com.example.wellness_backend.service.WellnessLogService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Author: Boliang Wang
- * Controller for wellness log CRUD APIs.
- */
 @RestController
 @RequestMapping("/api/wellness")
 @CrossOrigin(origins = "*")
@@ -23,8 +20,9 @@ public class WellnessLogController {
     }
 
     @PostMapping
-    public ApiResponse<WellnessLog> createLog(@RequestBody WellnessLog log) {
-        Long userId = 1L; // temporary user id before login/JWT is finished
+    public ApiResponse<WellnessLog> createLog(@RequestBody WellnessLog log,
+                                              HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
 
         WellnessLog savedLog = wellnessLogService.createLog(userId, log);
 
@@ -32,8 +30,8 @@ public class WellnessLogController {
     }
 
     @GetMapping
-    public ApiResponse<List<WellnessLog>> getAllLogs() {
-        Long userId = 1L; // temporary user id before login/JWT is finished
+    public ApiResponse<List<WellnessLog>> getAllLogs(HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
 
         List<WellnessLog> logs = wellnessLogService.getAllLogs(userId);
 
@@ -41,8 +39,9 @@ public class WellnessLogController {
     }
 
     @GetMapping("/{id}")
-    public ApiResponse<WellnessLog> getOneLog(@PathVariable Long id) {
-        Long userId = 1L; // temporary user id before login/JWT is finished
+    public ApiResponse<WellnessLog> getOneLog(@PathVariable Long id,
+                                              HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
 
         WellnessLog log = wellnessLogService.getLogById(userId, id);
 
@@ -51,8 +50,9 @@ public class WellnessLogController {
 
     @PutMapping("/{id}")
     public ApiResponse<WellnessLog> updateLog(@PathVariable Long id,
-                                              @RequestBody WellnessLog log) {
-        Long userId = 1L; // temporary user id before login/JWT is finished
+                                              @RequestBody WellnessLog log,
+                                              HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
 
         WellnessLog updatedLog = wellnessLogService.updateLog(userId, id, log);
 
@@ -60,8 +60,9 @@ public class WellnessLogController {
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse<String> deleteLog(@PathVariable Long id) {
-        Long userId = 1L; // temporary user id before login/JWT is finished
+    public ApiResponse<String> deleteLog(@PathVariable Long id,
+                                         HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
 
         wellnessLogService.deleteLog(userId, id);
 
