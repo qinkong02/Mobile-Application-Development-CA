@@ -43,14 +43,15 @@ class RegisterActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = RetrofitClient.api.register(RegisterRequest(username, email, password))
-                if (response.isSuccessful && response.body() != null) {
-                    val body = response.body()!!
-                    TokenManager.saveToken(body.token)
-                    TokenManager.saveUser(body.userId, body.userName)
+                val body = response.body()
+                val data = body?.data
+                if (response.isSuccessful && body?.success == true && data != null) {
+                    TokenManager.saveToken(data.token)
+                    TokenManager.saveUser(data.user.id.toString(), data.user.username)
                     startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                     finish()
                 } else {
-                    Toast.makeText(this@RegisterActivity, "注册失败，请稍后重试", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegisterActivity, body?.message ?: "注册失败，请稍后重试", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 Toast.makeText(this@RegisterActivity, "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()

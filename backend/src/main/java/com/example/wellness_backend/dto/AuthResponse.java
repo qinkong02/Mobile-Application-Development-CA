@@ -5,15 +5,15 @@ import com.example.wellness_backend.entity.User;
 public class AuthResponse {
 
     private UserInfo user;
+    private String token;
 
-    public AuthResponse(User user) {
-        this.user = new UserInfo(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getRole()
-        );
+    public AuthResponse(User user, String token) {
+        this.user = new UserInfo(user.getId(), user.getUsername(), user.getEmail(), user.getRole());
+        this.token = token;
     }
+
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 
     public UserInfo getUser() {
         return user;

@@ -8,10 +8,10 @@ interface ApiService {
 
     // ---------- 认证 ----------
     @POST("api/auth/login")
-    suspend fun login(@Body request: LoginRequest): Response<AuthResponse>
+    suspend fun login(@Body request: LoginRequest): Response<ApiResponse<AuthResponse>>
 
     @POST("api/auth/register")
-    suspend fun register(@Body request: RegisterRequest): Response<AuthResponse>
+    suspend fun register(@Body request: RegisterRequest): Response<ApiResponse<AuthResponse>>
 
     // ---------- 健康记录(对接后端 /api/wellness)----------
     @GET("api/wellness")
