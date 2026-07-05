@@ -41,16 +41,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun doLogin() {
-        val email = binding.etEmail.text.toString().trim()
+        val username = binding.etUsername.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "请输入邮箱和密码", Toast.LENGTH_SHORT).show()
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_SHORT).show()
             return
         }
 
 // TODO: 临时旁路,后端登录接口完成后删除
-        if (email == "test") {
+        if (username == "test") {
             goToHome()
             return
         }
@@ -58,14 +58,14 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.isEnabled = false
         lifecycleScope.launch {
             try {
-                val response = RetrofitClient.api.login(LoginRequest(email, password))
+                val response = RetrofitClient.api.login(LoginRequest(username, password))
                 if (response.isSuccessful && response.body() != null) {
                     val body = response.body()!!
                     TokenManager.saveToken(body.token)
                     TokenManager.saveUser(body.userId, body.userName)
                     goToHome()
                 } else {
-                    Toast.makeText(this@LoginActivity, "登录失败，请检查邮箱或密码", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "登录失败，请检查用户名或密码", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 Toast.makeText(this@LoginActivity, "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()

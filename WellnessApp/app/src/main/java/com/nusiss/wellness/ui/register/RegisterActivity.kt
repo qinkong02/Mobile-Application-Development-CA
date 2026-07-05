@@ -25,12 +25,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun doRegister() {
-        val name = binding.etName.text.toString().trim()
+        val username = binding.etUsername.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
         val confirm = binding.etConfirmPassword.text.toString().trim()
 
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "请完整填写信息", Toast.LENGTH_SHORT).show()
             return
         }
@@ -42,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnRegister.isEnabled = false
         lifecycleScope.launch {
             try {
-                val response = RetrofitClient.api.register(RegisterRequest(name, email, password))
+                val response = RetrofitClient.api.register(RegisterRequest(username, email, password))
                 if (response.isSuccessful && response.body() != null) {
                     val body = response.body()!!
                     TokenManager.saveToken(body.token)

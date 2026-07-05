@@ -13,6 +13,8 @@
     <string name="note_hint">选填</string>
     <string name="save_record">保存记录</string>
 
+    <string name="username_label">用户名</string>
+    <string name="username_hint">请输入用户名</string>
     <string name="email_label">邮箱</string>
     <string name="email_hint">name@example.com</string>
     <string name="password_label">密码</string>
@@ -25,8 +27,6 @@
 
     <string name="create_account_title">创建账号</string>
     <string name="register_subtitle">开启你的健康管理之旅</string>
-    <string name="name_label">姓名</string>
-    <string name="name_hint">张三</string>
     <string name="confirm_password_label">确认密码</string>
     <string name="register_button">注册</string>
 
