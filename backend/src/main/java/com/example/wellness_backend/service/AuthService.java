@@ -5,15 +5,18 @@ import com.example.wellness_backend.dto.LoginRequest;
 import com.example.wellness_backend.dto.RegisterRequest;
 import com.example.wellness_backend.entity.User;
 import com.example.wellness_backend.repository.UserRepository;
+import com.example.wellness_backend.utils.JwtUtils;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final JwtUtils jwtUtils;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, JwtUtils jwtUtils) {
         this.userRepository = userRepository;
+        this.jwtUtils = jwtUtils;
     }
 
     public AuthResponse register(RegisterRequest request) {
@@ -34,7 +37,9 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
-        return new AuthResponse(savedUser);
+        String token = jwtUtils.generateToken(savedUser.getId());
+
+        return new AuthResponse(savedUser, token);
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -46,6 +51,8 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid username or password");
         }
 
-        return new AuthResponse(user);
+        String token = jwtUtils.generateToken(user.getId());
+
+        return new AuthResponse(user, token);
     }
 }
