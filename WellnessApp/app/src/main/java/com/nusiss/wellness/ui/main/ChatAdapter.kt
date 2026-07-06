@@ -44,7 +44,7 @@ class ChatAdapter(private val items: List<ChatMessage>) :
                 } else {
                     holder.binding.tvMessage.text = item.text
                     holder.binding.tvMessage.setTextColor(
-                        ContextCompat.getColor(context, R.color.text_primary)
+                        ContextCompat.getColor(context, R.color.green_primary)
                     )
                 }
             }

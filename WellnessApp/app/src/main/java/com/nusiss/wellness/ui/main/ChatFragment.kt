@@ -87,7 +87,7 @@ class ChatFragment : Fragment() {
             } catch (e: Exception) {
                 if (_binding == null) return@launch
                 removeLoadingMessage(loadingIndex)
-                Toast.makeText(requireContext(), "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
                 if (_binding != null) {
                     setSending(false)

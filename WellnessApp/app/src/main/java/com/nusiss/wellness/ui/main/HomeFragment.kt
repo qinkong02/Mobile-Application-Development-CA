@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvGreeting.text = "你好，${TokenManager.getUserName()}"
+        binding.tvGreeting.text = "Hi, ${TokenManager.getUserName()}"
 
         binding.cardQuickEntry.setOnClickListener {
             startActivity(Intent(requireContext(), AddRecordActivity::class.java))
@@ -53,11 +53,11 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful && response.body() != null) {
                     binding.tvAiSuggestion.text = response.body()!!.summary
                 } else {
-                    binding.tvAiSuggestion.text = "点击查看/生成本周健康建议"
+                    binding.tvAiSuggestion.text = "Tap to view or generate this week's insights"
                 }
             } catch (e: Exception) {
                 if (_binding == null) return@launch
-                binding.tvAiSuggestion.text = "暂时无法获取建议，请检查网络"
+                binding.tvAiSuggestion.text = "Couldn't load insights. Please check your connection"
             }
         }
     }

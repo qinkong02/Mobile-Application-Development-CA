@@ -5,10 +5,67 @@
     android:layout_height="match_parent"
     android:background="@color/bg_page">
 
+    <LinearLayout
+        android:id="@+id/filterBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/chipFilterAll"
+            style="@style/TextSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="7dp"
+            android:background="@drawable/bg_pill_accent"
+            android:text="@string/record_filter_all"
+            android:textSize="12sp"
+            android:textColor="@color/green_primary"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/chipFilterSleep"
+            style="@style/TextSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="7dp"
+            android:background="@drawable/bg_pill_outline"
+            android:text="@string/record_type_sleep"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/chipFilterExercise"
+            style="@style/TextSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="7dp"
+            android:background="@drawable/bg_pill_outline"
+            android:text="@string/record_type_exercise"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/filterBar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRecords"
@@ -27,6 +84,8 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
         android:background="@drawable/bg_circle_teal"
+        android:outlineProvider="background"
+        android:elevation="6dp"
         android:padding="14dp"
         android:src="@drawable/ic_add"
         app:tint="@color/white"

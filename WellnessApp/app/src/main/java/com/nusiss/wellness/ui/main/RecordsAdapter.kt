@@ -1,9 +1,12 @@
 package com.nusiss.wellness.ui.main
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.nusiss.wellness.R
 import com.nusiss.wellness.data.model.WellnessRecord
 import com.nusiss.wellness.databinding.ItemRecordBinding
 
@@ -27,13 +30,18 @@ class RecordsAdapter(
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
         val item = items[position]
-        val typeLabel = if (item.type == "SLEEP") "睡" else "动"
-        holder.binding.tvTypeIcon.text = typeLabel
+        val context = holder.itemView.context
+        val isSleep = item.type == "SLEEP"
+        holder.binding.ivTypeIcon.setImageResource(if (isSleep) R.drawable.ic_sleep else R.drawable.ic_exercise)
+        holder.binding.ivTypeIcon.setBackgroundResource(if (isSleep) R.drawable.bg_circle_sleep else R.drawable.bg_circle_exercise)
+        holder.binding.ivTypeIcon.imageTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(context, if (isSleep) R.color.green_mid else R.color.white)
+        )
 
         val desc = if (item.type == "SLEEP") {
-            "睡眠 ${item.value}${item.unit}"
+            "Sleep ${item.value}${item.unit}"
         } else {
-            val exerciseLabel = item.exerciseType?.takeIf { it.isNotBlank() } ?: "运动"
+            val exerciseLabel = item.exerciseType?.takeIf { it.isNotBlank() } ?: "Exercise"
             "$exerciseLabel ${item.value.toInt()}${item.unit}"
         }
         holder.binding.tvDesc.text = desc

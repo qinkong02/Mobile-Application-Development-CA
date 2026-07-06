@@ -34,7 +34,7 @@ class ChatViewModel : ViewModel() {
                 // 拉取历史失败时静默降级，回退到欢迎语
             }
             if (messages.isEmpty()) {
-                messages.add(ChatMessage("你好，我可以帮你分析睡眠、运动数据，或者回答健康问题", isUser = false))
+                messages.add(ChatMessage("Hi! I can help analyze your sleep and exercise data, or answer any health questions.", isUser = false))
             }
             historyLoaded = true
             onLoaded()
@@ -46,7 +46,7 @@ class ChatViewModel : ViewModel() {
         return if (response.isSuccessful && response.body() != null) {
             response.body()!!.reply
         } else {
-            "抱歉，暂时无法回复，请稍后重试"
+            "Sorry, I can't respond right now. Please try again later."
         }
     }
 }

@@ -38,10 +38,10 @@ class RecommendationActivity : AppCompatActivity() {
                     binding.tvSummary.text = body.summary
                     adapter.updateData(body.items)
                 } else {
-                    binding.tvSummary.text = "暂无建议，点击下方按钮生成"
+                    binding.tvSummary.text = "No insights yet. Tap the button below to generate"
                 }
             } catch (e: Exception) {
-                binding.tvSummary.text = "网络连接失败：${e.message}"
+                binding.tvSummary.text = "Network error: ${e.message}"
             }
         }
     }
@@ -56,10 +56,10 @@ class RecommendationActivity : AppCompatActivity() {
                     binding.tvSummary.text = body.summary
                     adapter.updateData(body.items)
                 } else {
-                    Toast.makeText(this@RecommendationActivity, "生成失败，请重试", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RecommendationActivity, "Generation failed. Please try again", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@RecommendationActivity, "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RecommendationActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
                 binding.btnRegenerate.isEnabled = true
             }

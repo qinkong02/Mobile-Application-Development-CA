@@ -16,9 +16,13 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface_card"
+        android:background="@color/green_primary"
+        android:elevation="8dp"
         app:itemIconTint="@color/nav_item_color"
         app:itemTextColor="@color/nav_item_color"
+        app:itemBackground="@drawable/bg_nav_item_background"
+        app:itemTextAppearanceActive="@style/Text.Nav.Active"
+        app:itemTextAppearanceInactive="@style/Text.Nav.Inactive"
         app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

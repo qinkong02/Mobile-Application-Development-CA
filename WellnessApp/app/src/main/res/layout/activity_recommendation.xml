@@ -8,41 +8,46 @@
 
     <TextView
         android:id="@+id/btnBack"
+        style="@style/TextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:padding="16dp"
+        android:padding="18dp"
         app:drawableStartCompat="@drawable/ic_back"
-        app:drawableTint="@color/text_primary"
+        app:drawableTint="@color/green_primary"
         android:drawablePadding="10dp"
         android:text="@string/ai_suggestion_title"
-        android:textSize="15sp"
-        android:textColor="@color/text_primary" />
+        android:textSize="16sp"
+        android:textColor="@color/green_primary" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/bg_card_purple"
-        android:padding="14dp"
+        android:background="@drawable/bg_card_ai_suggestion"
+        android:outlineProvider="background"
+        android:elevation="3dp"
+        android:padding="18dp"
         android:layout_margin="16dp">
 
         <TextView
+            style="@style/TextSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/weekly_trend_title"
-            android:textSize="12sp"
-            android:textColor="@color/purple_800"
-            android:layout_marginBottom="4dp" />
+            android:textSize="14sp"
+            android:textColor="@color/green_primary"
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:id="@+id/tvSummary"
+            style="@style/TextBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/loading_summary"
             android:textSize="12sp"
             android:textColor="@color/text_secondary"
-            android:lineSpacingMultiplier="1.3" />
+            android:lineSpacingMultiplier="1.4" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -56,11 +61,13 @@
     <Button
         android:id="@+id/btnRegenerate"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:layout_margin="16dp"
         android:background="@drawable/bg_button_outline"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.015"
         android:text="@string/regenerate_button"
-        android:textColor="@color/teal_600"
+        android:textColor="@color/green_primary"
         android:textAllCaps="false" />
 
 </LinearLayout>

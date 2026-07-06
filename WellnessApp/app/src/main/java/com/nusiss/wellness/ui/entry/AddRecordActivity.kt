@@ -21,7 +21,7 @@ class AddRecordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddRecordBinding
     private var selectedType = "SLEEP"
-    private var selectedExerciseType = "跑步"
+    private var selectedExerciseType = "Running"
     private lateinit var exerciseTypeChips: List<TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,12 +54,18 @@ class AddRecordActivity : AppCompatActivity() {
         selectedType = type
         val isSleep = type == "SLEEP"
         binding.chipSleep.setBackgroundResource(
-            if (isSleep) R.drawable.bg_pill_accent else R.drawable.bg_pill_outline
+            if (isSleep) R.drawable.bg_pill_sleep_accent else R.drawable.bg_pill_outline
+        )
+        binding.chipSleep.setTextColor(
+            ContextCompat.getColor(this, if (isSleep) R.color.green_primary else R.color.text_secondary)
         )
         binding.chipExercise.setBackgroundResource(
-            if (!isSleep) R.drawable.bg_pill_accent else R.drawable.bg_pill_outline
+            if (!isSleep) R.drawable.bg_pill_exercise_accent else R.drawable.bg_pill_outline
         )
-        binding.tvValueLabel.text = if (isSleep) "睡眠时长（小时）" else "运动时长（分钟）"
+        binding.chipExercise.setTextColor(
+            ContextCompat.getColor(this, if (!isSleep) R.color.white else R.color.text_secondary)
+        )
+        binding.tvValueLabel.text = if (isSleep) "Sleep Duration (hrs)" else "Exercise Duration (min)"
 
         binding.tvExerciseTypeLabel.visibility = if (isSleep) View.GONE else View.VISIBLE
         binding.scrollExerciseType.visibility = if (isSleep) View.GONE else View.VISIBLE
@@ -73,10 +79,10 @@ class AddRecordActivity : AppCompatActivity() {
         exerciseTypeChips.forEach { chip ->
             val isSelected = chip.text.toString() == type
             chip.setBackgroundResource(
-                if (isSelected) R.drawable.bg_pill_accent else R.drawable.bg_pill_outline
+                if (isSelected) R.drawable.bg_pill_exercise_accent else R.drawable.bg_pill_outline
             )
             chip.setTextColor(
-                ContextCompat.getColor(this, if (isSelected) R.color.teal_800 else R.color.text_secondary)
+                ContextCompat.getColor(this, if (isSelected) R.color.white else R.color.text_secondary)
             )
         }
     }
@@ -87,13 +93,13 @@ class AddRecordActivity : AppCompatActivity() {
         val note = binding.etNote.text.toString().trim()
 
         if (valueText.isEmpty() || date.isEmpty()) {
-            Toast.makeText(this, "请填写完整信息", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             return
         }
 
         val value = valueText.toDoubleOrNull()
         if (value == null) {
-            Toast.makeText(this, "请输入有效的数字", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -114,13 +120,13 @@ class AddRecordActivity : AppCompatActivity() {
             try {
                 val response = RetrofitClient.api.addRecord(log)
                 if (response.isSuccessful) {
-                    Toast.makeText(this@AddRecordActivity, "记录已保存", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddRecordActivity, "Entry saved", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
-                    Toast.makeText(this@AddRecordActivity, "保存失败，请重试", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddRecordActivity, "Save failed. Please try again", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@AddRecordActivity, "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AddRecordActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
                 binding.btnSave.isEnabled = true
             }

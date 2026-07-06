@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.tvGoRegister.setOnLongClickListener {
             TokenManager.saveToken("test-token")
-            TokenManager.saveUser("test-id", "测试用户")
+            TokenManager.saveUser("test-id", "Test User")
             goToHome()
             true
         }
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.etPassword.text.toString().trim()
 
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please enter your username and password", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -60,10 +60,10 @@ class LoginActivity : AppCompatActivity() {
                     TokenManager.saveUser(data.user.id.toString(), data.user.username)
                     goToHome()
                 } else {
-                    Toast.makeText(this@LoginActivity, body?.message ?: "登录失败，请检查用户名或密码", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, body?.message ?: "Login failed. Please check your username or password", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@LoginActivity, "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
                 binding.btnLogin.isEnabled = true
             }

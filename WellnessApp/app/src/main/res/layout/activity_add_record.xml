@@ -12,16 +12,17 @@
 
         <TextView
             android:id="@+id/btnBack"
+            style="@style/TextTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:padding="16dp"
+            android:padding="18dp"
             app:drawableStartCompat="@drawable/ic_back"
-            app:drawableTint="@color/text_primary"
+            app:drawableTint="@color/green_primary"
             android:drawablePadding="10dp"
             android:text="@string/add_record_title"
-            android:textSize="15sp"
-            android:textColor="@color/text_primary" />
+            android:textSize="16sp"
+            android:textColor="@color/green_primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,10 +44,10 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="6dp"
-                    android:background="@drawable/bg_pill_accent"
+                    android:background="@drawable/bg_pill_sleep_accent"
                     android:text="@string/record_type_sleep"
                     android:textSize="12sp"
-                    android:textColor="@color/teal_800"
+                    android:textColor="@color/green_primary"
                     android:layout_marginEnd="8dp"
                     android:clickable="true"
                     android:focusable="true" />
@@ -90,10 +91,10 @@
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="14dp"
                         android:paddingVertical="6dp"
-                        android:background="@drawable/bg_pill_accent"
+                        android:background="@drawable/bg_pill_exercise_accent"
                         android:text="@string/exercise_type_running"
                         android:textSize="12sp"
-                        android:textColor="@color/teal_800"
+                        android:textColor="@color/white"
                         android:layout_marginEnd="8dp"
                         android:clickable="true"
                         android:focusable="true" />
@@ -196,8 +197,12 @@
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="50dp"
                 android:background="@drawable/bg_button_primary"
+                android:outlineProvider="background"
+                android:elevation="3dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.015"
                 android:text="@string/save_record"
                 android:textColor="@color/white"
                 android:textAllCaps="false" />

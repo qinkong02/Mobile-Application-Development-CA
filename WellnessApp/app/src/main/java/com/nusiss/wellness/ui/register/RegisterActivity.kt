@@ -31,11 +31,11 @@ class RegisterActivity : AppCompatActivity() {
         val confirm = binding.etConfirmPassword.text.toString().trim()
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "请完整填写信息", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             return
         }
         if (password != confirm) {
-            Toast.makeText(this, "两次输入的密码不一致", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -51,10 +51,10 @@ class RegisterActivity : AppCompatActivity() {
                     startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                     finish()
                 } else {
-                    Toast.makeText(this@RegisterActivity, body?.message ?: "注册失败，请稍后重试", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegisterActivity, body?.message ?: "Registration failed. Please try again later", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@RegisterActivity, "网络连接失败：${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
                 binding.btnRegister.isEnabled = true
             }

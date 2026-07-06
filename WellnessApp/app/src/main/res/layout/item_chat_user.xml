@@ -7,12 +7,15 @@
 
     <TextView
         android:id="@+id/tvMessage"
+        style="@style/TextBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:background="@drawable/bg_chat_bubble_user"
-        android:padding="10dp"
+        android:outlineProvider="background"
+        android:elevation="1dp"
+        android:padding="12dp"
         android:textSize="13sp"
-        android:textColor="@color/teal_800" />
+        android:textColor="@color/green_primary" />
 
 </LinearLayout>

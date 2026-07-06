@@ -12,17 +12,19 @@
         android:padding="32dp">
 
         <TextView
+            style="@style/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create_account_title"
-            android:textSize="20sp"
-            android:textColor="@color/text_primary" />
+            android:textSize="21sp"
+            android:textColor="@color/green_primary" />
 
         <TextView
+            style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="26dp"
             android:text="@string/register_subtitle"
             android:textSize="13sp"
             android:textColor="@color/text_secondary" />
@@ -74,8 +76,12 @@
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/bg_button_primary"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_button_auth"
+            android:outlineProvider="background"
+            android:elevation="3dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.015"
             android:text="@string/register_button"
             android:textColor="@color/white"
             android:textAllCaps="false" />

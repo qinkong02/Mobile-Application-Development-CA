@@ -1,55 +1,61 @@
 <resources>
-    <string name="app_name">健康助手</string>
+    <string name="app_name">Wellness</string>
 
-    <string name="add_record_title">记录健康数据</string>
-    <string name="record_type_label">记录类型</string>
-    <string name="record_type_sleep">睡眠</string>
-    <string name="record_type_exercise">运动</string>
-    <string name="sleep_duration_label">睡眠时长（小时）</string>
+    <string name="nav_title_home">Home</string>
+    <string name="nav_title_records">Records</string>
+    <string name="nav_title_chat">Chat</string>
+    <string name="nav_title_profile">Profile</string>
+
+    <string name="add_record_title">Log Entry</string>
+    <string name="record_type_label">Entry Type</string>
+    <string name="record_type_sleep">Sleep</string>
+    <string name="record_type_exercise">Exercise</string>
+    <string name="record_filter_all">All</string>
+    <string name="sleep_duration_label">Sleep Duration (hrs)</string>
     <string name="sleep_duration_hint">7.5</string>
-    <string name="date_label">日期</string>
+    <string name="date_label">Date</string>
     <string name="date_hint">2026-07-01</string>
-    <string name="note_label">备注</string>
-    <string name="note_hint">选填</string>
-    <string name="save_record">保存记录</string>
+    <string name="note_label">Notes</string>
+    <string name="note_hint">Optional</string>
+    <string name="save_record">Save Entry</string>
 
-    <string name="exercise_type_label">运动类型</string>
-    <string name="exercise_type_running">跑步</string>
-    <string name="exercise_type_yoga">瑜伽</string>
-    <string name="exercise_type_swimming">游泳</string>
-    <string name="exercise_type_gym">健身</string>
-    <string name="exercise_type_other">其他</string>
+    <string name="exercise_type_label">Exercise Type</string>
+    <string name="exercise_type_running">Running</string>
+    <string name="exercise_type_yoga">Yoga</string>
+    <string name="exercise_type_swimming">Swimming</string>
+    <string name="exercise_type_gym">Gym</string>
+    <string name="exercise_type_other">Other</string>
 
-    <string name="username_label">用户名</string>
-    <string name="username_hint">请输入用户名</string>
-    <string name="email_label">邮箱</string>
+    <string name="username_label">Username</string>
+    <string name="username_hint">Enter your username</string>
+    <string name="email_label">Email</string>
     <string name="email_hint">name@example.com</string>
-    <string name="password_label">密码</string>
+    <string name="password_label">Password</string>
     <string name="password_dots_hint">••••••••</string>
 
-    <string name="welcome_back">欢迎回来</string>
-    <string name="login_subtitle">登录以查看你的健康数据</string>
-    <string name="login_button">登录</string>
-    <string name="go_register_prompt">还没有账号？立即注册</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="login_subtitle">Sign in to view your wellness data</string>
+    <string name="login_button">Log In</string>
+    <string name="go_register_prompt">Don\'t have an account? Sign Up</string>
 
-    <string name="create_account_title">创建账号</string>
-    <string name="register_subtitle">开启你的健康管理之旅</string>
-    <string name="confirm_password_label">确认密码</string>
-    <string name="register_button">注册</string>
+    <string name="create_account_title">Create Account</string>
+    <string name="register_subtitle">Start your wellness journey</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="register_button">Sign Up</string>
 
-    <string name="default_greeting">你好</string>
-    <string name="ai_suggestion_title">AI 健康建议</string>
-    <string name="loading_suggestion">正在加载建议...</string>
-    <string name="quick_entry_title">快捷入口</string>
-    <string name="quick_entry_record">记录数据</string>
-    <string name="quick_entry_chat">AI 聊天</string>
+    <string name="default_greeting">Hi</string>
+    <string name="ai_suggestion_title">AI Health Insights</string>
+    <string name="loading_suggestion">Loading insights…</string>
+    <string name="quick_entry_title">Quick Actions</string>
+    <string name="quick_entry_record">Log Data</string>
+    <string name="quick_entry_chat">AI Chat</string>
 
-    <string name="chat_input_hint">输入你的问题</string>
-    <string name="chat_thinking">正在思考…</string>
+    <string name="chat_input_hint">Ask a question…</string>
+    <string name="chat_thinking">Thinking…</string>
 
-    <string name="logout_button">退出登录</string>
+    <string name="logout_button">Log Out</string>
 
-    <string name="weekly_trend_title">本周趋势分析</string>
-    <string name="loading_summary">正在加载...</string>
-    <string name="regenerate_button">重新生成建议</string>
+    <string name="weekly_trend_title">Weekly Trends</string>
+    <string name="loading_summary">Loading…</string>
+    <string name="regenerate_button">Regenerate Insights</string>
 </resources>

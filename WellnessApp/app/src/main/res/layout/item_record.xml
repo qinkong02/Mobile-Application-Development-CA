@@ -4,17 +4,19 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:paddingVertical="10dp"
-    android:background="@color/bg_page">
+    android:background="@drawable/bg_card"
+    android:outlineProvider="background"
+    android:elevation="2dp"
+    android:padding="14dp"
+    android:layout_marginBottom="10dp">
 
-    <TextView
-        android:id="@+id/tvTypeIcon"
+    <ImageView
+        android:id="@+id/ivTypeIcon"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:gravity="center"
-        android:background="@drawable/bg_circle_teal_light"
-        android:textColor="@color/teal_600"
-        android:textSize="12sp" />
+        android:padding="8dp"
+        android:background="@drawable/bg_circle_teal_100"
+        android:contentDescription="@null" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -25,6 +27,7 @@
 
         <TextView
             android:id="@+id/tvDesc"
+            style="@style/TextSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
@@ -32,17 +35,21 @@
 
         <TextView
             android:id="@+id/tvDate"
+            style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="11sp"
-            android:textColor="@color/text_secondary" />
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="2dp" />
 
         <TextView
             android:id="@+id/tvNote"
+            style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="11sp"
             android:textColor="@color/text_muted"
+            android:layout_marginTop="2dp"
             android:visibility="gone" />
     </LinearLayout>
 
