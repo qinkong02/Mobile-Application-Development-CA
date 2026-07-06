@@ -26,11 +26,84 @@
         android:textSize="17sp"
         android:textColor="@color/green_primary" />
 
+    <!-- added by XieMaonan：身高/体重/年龄/性别，供 chatbot 做个性化建议/热量计算 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        android:layout_marginTop="24dp">
+
+        <TextView style="@style/FieldLabel" android:text="@string/height_label" />
+        <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:hint="@string/height_hint"
+            android:inputType="number"
+            android:importantForAutofill="no"
+            android:layout_marginBottom="12dp" />
+
+        <TextView style="@style/FieldLabel" android:text="@string/weight_label" />
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:hint="@string/weight_hint"
+            android:inputType="numberDecimal"
+            android:importantForAutofill="no"
+            android:layout_marginBottom="12dp" />
+
+        <TextView style="@style/FieldLabel" android:text="@string/age_label" />
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:hint="@string/age_hint"
+            android:inputType="number"
+            android:importantForAutofill="no"
+            android:layout_marginBottom="12dp" />
+
+        <TextView style="@style/FieldLabel" android:text="@string/gender_label" />
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender_male" />
+
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/gender_female" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnSaveProfile"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_button_primary"
+            android:text="@string/save_profile_button"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="200dp"
         android:layout_height="46dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/bg_button_outline"
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.015"

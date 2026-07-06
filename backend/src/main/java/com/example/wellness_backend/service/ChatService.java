@@ -5,6 +5,7 @@ import com.example.wellness_backend.entity.ChatMessage;
 import com.example.wellness_backend.entity.User;
 import com.example.wellness_backend.repository.ChatMessageRepository;
 import com.example.wellness_backend.repository.UserRepository;
+import com.example.wellness_backend.tool.WellnessTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +29,9 @@ public class ChatService {
 
     private static final String SYSTEM_PROMPT =
             "你是一位友好的健康助理，可以帮助用户分析睡眠、运动数据，或者回答健康相关的问题。" +
-                    "请用简洁、易懂的语言回复。";
+                    "如果用户的问题涉及个性化建议（比如减肥、饮食、运动计划），" +
+                    "请调用可用的工具获取用户的身高体重年龄性别、近期健康数据或计算所需的热量，" +
+                    "不要凭空猜测或编造这些数值。请用简洁、易懂的语言回复。";
 
     /** 传给 AI 的最近历史消息条数上限，避免 token 过多 */
     private static final int MAX_CONTEXT_MESSAGES = 20;
@@ -40,6 +44,11 @@ public class ChatService {
 
     @Autowired
     private UserRepository userRepository;
+
+    // added by XieMaonan：让 ChatClient 按需调用工具查询用户资料/健康数据，
+    // 而不是每次都把这些数据静态拼进 prompt
+    @Autowired
+    private WellnessTools wellnessTools;
 
     public String reply(Long userId, String message) {
         if (message == null || message.trim().isEmpty()) {
@@ -57,6 +66,8 @@ public class ChatService {
         String reply = chatClient.prompt()
                 .system(SYSTEM_PROMPT)
                 .messages(contextMessages)
+                .tools(wellnessTools)
+                .toolContext(Map.of("userId", userId))
                 .call()
                 .content();
 
