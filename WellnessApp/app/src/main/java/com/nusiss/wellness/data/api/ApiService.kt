@@ -36,4 +36,11 @@ interface ApiService {
     // ---------- Agentic AI 健康建议 ----------
     @POST("api/agent/generate")
     suspend fun generateRecommendation(): Response<ApiResponse<RecommendationDTO>>
+
+    // added by XieMaonan：身高/体重/年龄/性别，供 chatbot 的工具调用做个性化建议/热量计算
+    @GET("api/user/profile")
+    suspend fun getUserProfile(): Response<ApiResponse<UserProfile>>
+
+    @PUT("api/user/profile")
+    suspend fun updateUserProfile(@Body profile: UserProfile): Response<ApiResponse<UserProfile>>
 }

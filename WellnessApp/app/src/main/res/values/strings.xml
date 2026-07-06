@@ -55,6 +55,20 @@
 
     <string name="logout_button">Log Out</string>
 
+    <!-- added by XieMaonan: profile fields for chatbot personalization -->
+    <string name="height_label">Height (cm)</string>
+    <string name="height_hint">e.g. 175</string>
+    <string name="weight_label">Weight (kg)</string>
+    <string name="weight_hint">e.g. 68.5</string>
+    <string name="age_label">Age</string>
+    <string name="age_hint">e.g. 28</string>
+    <string name="gender_label">Gender</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="save_profile_button">Save Profile</string>
+    <string name="profile_saved_toast">Profile saved</string>
+    <string name="profile_save_failed_toast">Failed to save profile</string>
+
     <string name="weekly_trend_title">Weekly Trends</string>
     <string name="loading_summary">Loading…</string>
     <string name="regenerate_button">Regenerate Insights</string>

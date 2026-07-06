@@ -30,6 +30,15 @@ public class User {
     @Column(nullable = false, length = 20)
     private String role = "USER";
 
+    // profile fields added by XieMaonan：供 chatbot 的 WellnessTools 做个性化建议/热量计算用
+    private Integer heightCm;
+
+    private Double weightKg;
+
+    private Integer age;
+
+    private String gender;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WellnessLog> wellnessLogs = new ArrayList<>();
@@ -66,6 +75,38 @@ public class User {
 
     public List<WellnessLog> getWellnessLogs() {
         return wellnessLogs;
+    }
+
+    public Integer getHeightCm() {
+        return heightCm;
+    }
+
+    public Double getWeightKg() {
+        return weightKg;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setHeightCm(Integer heightCm) {
+        this.heightCm = heightCm;
+    }
+
+    public void setWeightKg(Double weightKg) {
+        this.weightKg = weightKg;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public void setId(Long id) {
