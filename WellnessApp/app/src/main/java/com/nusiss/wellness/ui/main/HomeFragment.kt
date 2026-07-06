@@ -14,6 +14,7 @@ import com.nusiss.wellness.databinding.FragmentHomeBinding
 import com.nusiss.wellness.ui.entry.AddRecordActivity
 import com.nusiss.wellness.ui.recommendation.RecommendationActivity
 import kotlinx.coroutines.launch
+import android.content.Context
 
 class HomeFragment : Fragment() {
 
@@ -46,18 +47,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadLatestRecommendation() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            try {
-                val response = RetrofitClient.api.getLatestRecommendation()
-                if (_binding == null) return@launch
-                if (response.isSuccessful && response.body() != null) {
-                    binding.tvAiSuggestion.text = response.body()!!.summary
-                } else {
-                    binding.tvAiSuggestion.text = "Tap to view or generate this week's insights"
-                }
-            } catch (e: Exception) {
-                if (_binding == null) return@launch
-                binding.tvAiSuggestion.text = "Couldn't load insights. Please check your connection"
+        val cached = requireContext()
+            .getSharedPreferences("ai_insights", Context.MODE_PRIVATE)
+            .getString("latest_recommendation_text", null)
+
+        binding.tvAiSuggestion.text = when {
+            cached.isNullOrBlank() -> "Tap to view or generate this week's insights"
+            else -> {
+                val idx = cached.indexOf("【总体评价】")
+                if (idx >= 0) cached.substring(idx + "【总体评价】".length).trim()
+                else "Insights ready — tap to view"
             }
         }
     }

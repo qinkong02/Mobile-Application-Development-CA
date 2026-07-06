@@ -34,9 +34,6 @@ interface ApiService {
     suspend fun getChatHistory(): Response<ApiResponse<List<ChatHistoryItem>>>
 
     // ---------- Agentic AI 健康建议 ----------
-    @POST("api/recommendations/generate")
-    suspend fun generateRecommendation(): Response<RecommendationResponse>
-
-    @GET("api/recommendations/latest")
-    suspend fun getLatestRecommendation(): Response<RecommendationResponse>
+    @POST("api/agent/generate")
+    suspend fun generateRecommendation(): Response<ApiResponse<RecommendationDTO>>
 }
