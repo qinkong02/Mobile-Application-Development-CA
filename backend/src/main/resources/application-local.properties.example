@@ -1,0 +1,6 @@
+# added by XieMaonan: template for local secrets. Copy this file to
+# application-local.properties (already gitignored) and fill in real values.
+# Do NOT put real keys/secrets in application.properties - that file is
+# tracked by git and this repo is public.
+spring.ai.openai.api-key=your-deepseek-api-key-here
+jwt.secret=replace-with-a-long-random-string
