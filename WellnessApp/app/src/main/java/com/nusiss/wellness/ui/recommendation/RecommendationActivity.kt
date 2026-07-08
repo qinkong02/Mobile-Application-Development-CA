@@ -32,8 +32,32 @@ class RecommendationActivity : AppCompatActivity() {
 
         binding.btnBack.setOnClickListener { finish() }
         binding.btnRegenerate.setOnClickListener { generateRecommendation() }
+        binding.btnRefresh.setOnClickListener { fetchLatestRecommendation() }
 
         loadFromCache()
+    }
+
+    private fun fetchLatestRecommendation() {
+        binding.btnRefresh.isEnabled = false
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.api.getLatestRecommendation()
+                val body = response.body()
+                if (response.isSuccessful && body?.success == true && body.data != null) {
+                    val text = body.data.recommendationText
+                    prefs.edit().putString(cacheKey, text).apply()
+                    render(text)
+                    Toast.makeText(this@RecommendationActivity, "Latest insights loaded", Toast.LENGTH_SHORT).show()
+                } else {
+                    val msg = body?.message ?: "Failed to fetch latest insights"
+                    Toast.makeText(this@RecommendationActivity, msg, Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@RecommendationActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+            } finally {
+                binding.btnRefresh.isEnabled = true
+            }
+        }
     }
 
     /** 打开时从本地缓存读上次结果；没有就显示空状态 */

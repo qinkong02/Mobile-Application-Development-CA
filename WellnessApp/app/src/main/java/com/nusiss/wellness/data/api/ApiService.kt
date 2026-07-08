@@ -40,6 +40,9 @@ interface ApiService {
     @POST("api/agent/generate")
     suspend fun generateRecommendation(): Response<ApiResponse<RecommendationDTO>>
 
+    @GET("api/agent/recommendations/latest")
+    suspend fun getLatestRecommendation(): Response<ApiResponse<RecommendationDTO>>
+
     // added by XieMaonan：身高/体重/年龄/性别，供 chatbot 的工具调用做个性化建议/热量计算
     @GET("api/user/profile")
     suspend fun getUserProfile(): Response<ApiResponse<UserProfile>>

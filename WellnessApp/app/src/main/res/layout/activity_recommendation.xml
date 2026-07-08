@@ -6,19 +6,37 @@
     android:orientation="vertical"
     android:background="@color/bg_page">
 
-    <TextView
-        android:id="@+id/btnBack"
-        style="@style/TextTitle"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="18dp"
-        app:drawableStartCompat="@drawable/ic_back"
-        app:drawableTint="@color/green_primary"
-        android:drawablePadding="10dp"
-        android:text="@string/ai_suggestion_title"
-        android:textSize="16sp"
-        android:textColor="@color/green_primary" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/btnBack"
+            style="@style/TextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="18dp"
+            app:drawableStartCompat="@drawable/ic_back"
+            app:drawableTint="@color/green_primary"
+            android:drawablePadding="10dp"
+            android:text="@string/ai_suggestion_title"
+            android:textSize="16sp"
+            android:textColor="@color/green_primary" />
+
+        <ImageButton
+            android:id="@+id/btnRefresh"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_refresh"
+            android:contentDescription="Refresh latest insights"
+            android:padding="12dp" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
