@@ -1,0 +1,72 @@
+package com.example.wellness_backend.controller;
+
+import com.example.wellness_backend.dto.ApiResponse;
+import com.example.wellness_backend.entity.WellnessLog;
+import com.example.wellness_backend.service.WellnessLogService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * Author: Boliang Wang
+ * Controller for wellness log CRUD APIs.
+ */
+@RestController
+@RequestMapping("/api/wellness")
+@CrossOrigin(origins = "*")
+public class WellnessLogController {
+
+    private final WellnessLogService wellnessLogService;
+
+    public WellnessLogController(WellnessLogService wellnessLogService) {
+        this.wellnessLogService = wellnessLogService;
+    }
+
+    @PostMapping
+    public ApiResponse<WellnessLog> createLog(@RequestBody WellnessLog log, HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
+
+        WellnessLog savedLog = wellnessLogService.createLog(userId, log);
+
+        return ApiResponse.success("Wellness log created successfully", savedLog);
+    }
+
+    @GetMapping
+    public ApiResponse<List<WellnessLog>> getAllLogs(HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
+
+        List<WellnessLog> logs = wellnessLogService.getAllLogs(userId);
+
+        return ApiResponse.success(logs);
+    }
+
+    @GetMapping("/{id}")
+    public ApiResponse<WellnessLog> getOneLog(@PathVariable Long id, HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
+
+        WellnessLog log = wellnessLogService.getLogById(userId, id);
+
+        return ApiResponse.success(log);
+    }
+
+    @PutMapping("/{id}")
+    public ApiResponse<WellnessLog> updateLog(@PathVariable Long id,
+                                              @RequestBody WellnessLog log,
+                                              HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
+
+        WellnessLog updatedLog = wellnessLogService.updateLog(userId, id, log);
+
+        return ApiResponse.success("Wellness log updated successfully", updatedLog);
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse<String> deleteLog(@PathVariable Long id, HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("currentUserId");
+
+        wellnessLogService.deleteLog(userId, id);
+
+        return ApiResponse.success("Deleted successfully", null);
+    }
+}

@@ -1,0 +1,31 @@
+<resources>
+    <!-- Green system: primary (dark, saturated) -> nav bar / titles / core buttons -->
+    <color name="green_primary">#0F4229</color>
+    <!-- Green system: mid (medium, saturated) -> tags, dividers, icon tints -->
+    <color name="green_mid">#2E8B57</color>
+    <!-- Green system: light (kept saturated, never washed out) -> card backgrounds / background blocks -->
+    <color name="green_light">#93CBA4</color>
+    <!-- Green system: unselected nav icon on the dark primary bar (white, lower opacity) -->
+    <color name="green_nav_muted">#8CFFFFFF</color>
+    <!-- Subtle active-tab indicator pill on the dark primary bar -->
+    <color name="green_nav_indicator">#4093CBA4</color>
+
+    <!-- Feature accents within the green family (kept as specified) -->
+    <color name="green_ai_chat">#2EA868</color>
+    <color name="green_sleep">#87E9DE</color>
+    <color name="green_exercise">#1A7047</color>
+
+    <!-- Accent: low-saturation dark blue -> emphasis / warning -->
+    <color name="blue_accent">#3C5A73</color>
+
+    <!-- Base page background: clean light gray, never stark white -->
+    <color name="bg_page">#F2F4F1</color>
+    <color name="surface_card">#FFFFFF</color>
+
+    <color name="text_primary">#2C2C2A</color>
+    <color name="text_secondary">#5F5E5A</color>
+    <color name="text_muted">#888780</color>
+
+    <color name="border">#D3D1C7</color>
+    <color name="white">#FFFFFF</color>
+</resources>

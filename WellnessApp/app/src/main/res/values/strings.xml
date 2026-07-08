@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">Wellness</string>
+
+    <string name="nav_title_home">Home</string>
+    <string name="nav_title_records">Records</string>
+    <string name="nav_title_chat">Chat</string>
+    <string name="nav_title_profile">Profile</string>
+
+    <string name="add_record_title">Log Entry</string>
+    <string name="record_type_label">Entry Type</string>
+    <string name="record_type_sleep">Sleep</string>
+    <string name="record_type_exercise">Exercise</string>
+    <string name="record_filter_all">All</string>
+    <string name="sleep_duration_label">Sleep Duration (hrs)</string>
+    <string name="sleep_duration_hint">7.5</string>
+    <string name="date_label">Date</string>
+    <string name="date_hint">2026-07-01</string>
+    <string name="note_label">Notes</string>
+    <string name="note_hint">Optional</string>
+    <string name="save_record">Save Entry</string>
+
+    <string name="exercise_type_label">Exercise Type</string>
+    <string name="exercise_type_running">Running</string>
+    <string name="exercise_type_yoga">Yoga</string>
+    <string name="exercise_type_swimming">Swimming</string>
+    <string name="exercise_type_gym">Gym</string>
+    <string name="exercise_type_other">Other</string>
+
+    <string name="username_label">Username</string>
+    <string name="username_hint">Enter your username</string>
+    <string name="email_label">Email</string>
+    <string name="email_hint">name@example.com</string>
+    <string name="password_label">Password</string>
+    <string name="password_dots_hint">••••••••</string>
+
+    <string name="welcome_back">Welcome Back</string>
+    <string name="login_subtitle">Sign in to view your wellness data</string>
+    <string name="login_button">Log In</string>
+    <string name="go_register_prompt">Don\'t have an account? Sign Up</string>
+
+    <string name="create_account_title">Create Account</string>
+    <string name="register_subtitle">Start your wellness journey</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="register_button">Sign Up</string>
+
+    <string name="default_greeting">Hi</string>
+    <string name="ai_suggestion_title">AI Health Insights</string>
+    <string name="loading_suggestion">Loading insights…</string>
+    <string name="quick_entry_title">Quick Actions</string>
+    <string name="quick_entry_record">Log Data</string>
+    <string name="quick_entry_chat">AI Chat</string>
+
+    <string name="chat_input_hint">Ask a question…</string>
+    <string name="chat_thinking">Thinking…</string>
+
+    <string name="logout_button">Log Out</string>
+
+    <!-- added by XieMaonan: profile fields for chatbot personalization -->
+    <string name="height_label">Height (cm)</string>
+    <string name="height_hint">e.g. 175</string>
+    <string name="weight_label">Weight (kg)</string>
+    <string name="weight_hint">e.g. 68.5</string>
+    <string name="age_label">Age</string>
+    <string name="age_hint">e.g. 28</string>
+    <string name="gender_label">Gender</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="save_profile_button">Save Profile</string>
+    <string name="profile_saved_toast">Profile saved</string>
+    <string name="profile_save_failed_toast">Failed to save profile</string>
+
+    <string name="weekly_trend_title">Weekly Trends</string>
+    <string name="loading_summary">Loading…</string>
+    <string name="regenerate_button">Regenerate Insights</string>
+</resources>

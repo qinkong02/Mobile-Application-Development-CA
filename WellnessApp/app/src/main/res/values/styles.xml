@@ -1,0 +1,45 @@
+<resources>
+    <style name="FieldLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <!-- Typography hierarchy: bold headline -->
+    <style name="TextTitle">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <!-- Typography hierarchy: medium-weight subtitle -->
+    <style name="TextSubtitle">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.015</item>
+    </style>
+
+    <!-- Typography hierarchy: light, regular body copy -->
+    <style name="TextBody">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <!-- Bottom nav: selected tab label -->
+    <style name="Text.Nav.Active" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <!-- Bottom nav: unselected tab label -->
+    <style name="Text.Nav.Inactive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+</resources>

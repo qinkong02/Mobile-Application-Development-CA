@@ -1,0 +1,13 @@
+target/
+.idea/
+*.iml
+*.log
+.DS_Store
+Thumbs.db
+
+# Local secrets & build outputs
+**/application-local.properties
+backend/target/
+WellnessApp/build/
+WellnessApp/.gradle/
+WellnessApp/.claude/
