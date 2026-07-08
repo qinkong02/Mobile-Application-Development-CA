@@ -11,4 +11,5 @@ public interface RecommendationRepository  extends JpaRepository<Recommendation,
 
     //最近一条记录
     Recommendation findTopByUserOrderByGeneratedAtDesc(User user);
+
 }
