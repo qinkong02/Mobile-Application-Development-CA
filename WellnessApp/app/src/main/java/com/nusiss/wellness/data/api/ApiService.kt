@@ -20,6 +20,9 @@ interface ApiService {
     @POST("api/wellness")
     suspend fun addRecord(@Body log: WellnessLog): Response<ApiResponse<WellnessLog>>
 
+    @PUT("api/wellness/{id}")
+    suspend fun updateRecord(@Path("id") id: Long, @Body log: WellnessLog): Response<ApiResponse<WellnessLog>>
+
     @DELETE("api/wellness/{id}")
     suspend fun deleteRecord(@Path("id") id: Long): Response<ApiResponse<String>>
 

@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nusiss.wellness.R
@@ -12,7 +13,8 @@ import com.nusiss.wellness.databinding.ItemRecordBinding
 
 class RecordsAdapter(
     private var items: List<WellnessRecord>,
-    private val onLongClick: (WellnessRecord) -> Unit
+    private val onEdit: (WellnessRecord) -> Unit,
+    private val onDelete: (WellnessRecord) -> Unit
 ) : RecyclerView.Adapter<RecordsAdapter.RecordViewHolder>() {
 
     fun updateData(newItems: List<WellnessRecord>) {
@@ -54,9 +56,18 @@ class RecordsAdapter(
             holder.binding.tvNote.visibility = View.GONE
         }
 
-        holder.itemView.setOnLongClickListener {
-            onLongClick(item)
-            true
+        holder.binding.btnMore.setOnClickListener { view ->
+            val popup = PopupMenu(context, view)
+            popup.menu.add("Edit")
+            popup.menu.add("Delete")
+            popup.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.title) {
+                    "Edit" -> onEdit(item)
+                    "Delete" -> onDelete(item)
+                }
+                true
+            }
+            popup.show()
         }
     }
 

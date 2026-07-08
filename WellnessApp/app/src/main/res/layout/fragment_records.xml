@@ -6,67 +6,99 @@
     android:background="@color/bg_page">
 
     <LinearLayout
-        android:id="@+id/filterBar"
-        android:layout_width="wrap_content"
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp">
+        android:gravity="center_vertical"
+        android:paddingEnd="16dp">
+
+        <LinearLayout
+            android:id="@+id/filterBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/chipFilterAll"
+                style="@style/TextSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:gravity="center"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="7dp"
+                android:background="@drawable/bg_pill_accent"
+                android:text="@string/record_filter_all"
+                android:textSize="12sp"
+                android:textColor="@color/green_primary"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/chipFilterSleep"
+                style="@style/TextSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:gravity="center"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="7dp"
+                android:background="@drawable/bg_pill_outline"
+                android:text="@string/record_type_sleep"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/chipFilterExercise"
+                style="@style/TextSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:gravity="center"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="7dp"
+                android:background="@drawable/bg_pill_outline"
+                android:text="@string/record_type_exercise"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/chipFilterAll"
-            style="@style/TextSubtitle"
+            android:id="@+id/tvDateRange"
+            style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:gravity="center"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="7dp"
-            android:background="@drawable/bg_pill_accent"
-            android:text="@string/record_filter_all"
-            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:textSize="11sp"
             android:textColor="@color/green_primary"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:focusable="true" />
+            android:visibility="gone"
+            android:layout_marginEnd="4dp" />
 
-        <TextView
-            android:id="@+id/chipFilterSleep"
-            style="@style/TextSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:gravity="center"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="7dp"
-            android:background="@drawable/bg_pill_outline"
-            android:text="@string/record_type_sleep"
-            android:textSize="12sp"
-            android:textColor="@color/text_secondary"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/chipFilterExercise"
-            style="@style/TextSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:gravity="center"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="7dp"
-            android:background="@drawable/bg_pill_outline"
-            android:text="@string/record_type_exercise"
-            android:textSize="12sp"
-            android:textColor="@color/text_secondary"
-            android:clickable="true"
-            android:focusable="true" />
+        <ImageButton
+            android:id="@+id/btnDateFilter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_date_range"
+            android:contentDescription="Filter by date"
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -74,7 +106,7 @@
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/filterBar">
+        android:layout_below="@id/topBar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRecords"

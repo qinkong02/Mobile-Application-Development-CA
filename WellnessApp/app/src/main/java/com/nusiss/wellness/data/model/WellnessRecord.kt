@@ -1,5 +1,7 @@
 package com.nusiss.wellness.data.model
 
+import java.io.Serializable
+
 data class WellnessRecord(
     val id: String? = null,
     val type: String,        // "SLEEP" 或 "EXERCISE"
@@ -8,4 +10,4 @@ data class WellnessRecord(
     val recordDate: String,   // "yyyy-MM-dd"
     val note: String? = null,
     val exerciseType: String? = null   // 运动类型，如 "跑步"/"瑜伽"，仅 EXERCISE 条目使用
-)
+) : Serializable

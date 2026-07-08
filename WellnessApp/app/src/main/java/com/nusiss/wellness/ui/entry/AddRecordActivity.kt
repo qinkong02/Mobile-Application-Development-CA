@@ -23,11 +23,14 @@ class AddRecordActivity : AppCompatActivity() {
     private var selectedType = "SLEEP"
     private var selectedExerciseType = "Running"
     private lateinit var exerciseTypeChips: List<TextView>
+    private var recordToEdit: WellnessRecord? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddRecordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        recordToEdit = intent.getSerializableExtra("RECORD_DATA") as? WellnessRecord
 
         binding.etDate.setText(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date()))
 
@@ -42,12 +45,26 @@ class AddRecordActivity : AppCompatActivity() {
             chip.setOnClickListener { selectExerciseType(chip.text.toString()) }
         }
 
-        selectType("SLEEP")
+        if (recordToEdit != null) {
+            setupEditMode(recordToEdit!!)
+        } else {
+            selectType("SLEEP")
+        }
+
         binding.chipSleep.setOnClickListener { selectType("SLEEP") }
         binding.chipExercise.setOnClickListener { selectType("EXERCISE") }
 
         binding.btnBack.setOnClickListener { finish() }
         binding.btnSave.setOnClickListener { saveRecord() }
+    }
+
+    private fun setupEditMode(record: WellnessRecord) {
+        binding.btnBack.text = "Edit Record"
+        binding.etDate.setText(record.recordDate)
+        binding.etValue.setText(if (record.value % 1.0 == 0.0) record.value.toInt().toString() else record.value.toString())
+        binding.etNote.setText(record.note ?: "")
+        selectedExerciseType = record.exerciseType ?: "Running"
+        selectType(record.type)
     }
 
     private fun selectType(type: String) {
@@ -118,9 +135,15 @@ class AddRecordActivity : AppCompatActivity() {
         binding.btnSave.isEnabled = false
         lifecycleScope.launch {
             try {
-                val response = RetrofitClient.api.addRecord(log)
+                val recordId = recordToEdit?.id?.toLongOrNull()
+                val response = if (recordId != null) {
+                    RetrofitClient.api.updateRecord(recordId, log)
+                } else {
+                    RetrofitClient.api.addRecord(log)
+                }
+
                 if (response.isSuccessful) {
-                    Toast.makeText(this@AddRecordActivity, "Entry saved", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddRecordActivity, if (recordId != null) "Entry updated" else "Entry saved", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
                     Toast.makeText(this@AddRecordActivity, "Save failed. Please try again", Toast.LENGTH_SHORT).show()
