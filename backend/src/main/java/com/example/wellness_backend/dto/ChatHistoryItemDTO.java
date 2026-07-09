@@ -3,7 +3,7 @@ package com.example.wellness_backend.dto;
 import java.time.LocalDateTime;
 
 /**
- * @author XieMaonan
+ * @author XieMaonan/zheng chaorui
  */
 public class ChatHistoryItemDTO {
     private String role;
