@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:background="@drawable/bg_input"
-            android:hint="@string/password_dots_hint"
+            android:hint="@string/password_hint"
             android:inputType="textPassword"
             android:autofillHints="password"
             android:textSize="14sp"
