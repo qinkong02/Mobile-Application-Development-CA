@@ -31,7 +31,11 @@
     <string name="email_label">Email</string>
     <string name="email_hint">name@example.com</string>
     <string name="password_label">Password</string>
-    <string name="password_dots_hint">••••••••</string>
+    <!-- fixed by XieMaonan: hint used to be a literal row of dots ("••••••••"),
+         which is indistinguishable from inputType="textPassword" masking real
+         input, making the field look pre-filled when it's actually empty -->
+    <string name="password_hint">Enter your password</string>
+    <string name="confirm_password_hint">Re-enter your password</string>
 
     <string name="welcome_back">Welcome Back</string>
     <string name="login_subtitle">Sign in to view your wellness data</string>
