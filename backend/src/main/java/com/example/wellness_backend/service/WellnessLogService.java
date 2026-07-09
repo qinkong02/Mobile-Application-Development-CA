@@ -43,6 +43,7 @@ public class WellnessLogService {
     }
 
     public WellnessLog updateLog(Long userId, Long id, WellnessLog newLog) {
+
         WellnessLog oldLog = wellnessLogRepository.findByIdAndUser_Id(id, userId)
                 .orElseThrow(() -> new RuntimeException("Wellness log not found"));
 

@@ -1,7 +1,7 @@
 package com.example.wellness_backend.dto;
 
 import com.example.wellness_backend.entity.User;
-
+//Author:Mo Yundi
 public class AuthResponse {
 
     private UserInfo user;

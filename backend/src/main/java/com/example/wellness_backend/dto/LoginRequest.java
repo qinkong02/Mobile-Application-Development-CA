@@ -1,7 +1,9 @@
 package com.example.wellness_backend.dto;
 
 import jakarta.validation.constraints.NotBlank;
-
+/**
+ * @author Mo Yundi
+ */
 public class LoginRequest {
 
     @NotBlank(message = "Username is required")

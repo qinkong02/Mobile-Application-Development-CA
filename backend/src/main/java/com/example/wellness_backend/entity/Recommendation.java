@@ -2,7 +2,7 @@ package com.example.wellness_backend.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
+//Author:Zhang Yuhao
 //此类用于对应储存ai给过的建议的表
 @Entity
 @Table(name = "recommendations")

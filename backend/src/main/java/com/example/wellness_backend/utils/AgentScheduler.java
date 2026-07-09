@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+//Author:Zhang Yuhao
 @Component
 public class AgentScheduler {
 
@@ -23,8 +23,8 @@ public class AgentScheduler {
     private UserRepository userRepository;
 
     // 每周日晚上 22:00 执行
-//    @Scheduled(cron = "0 0 22 * * SUN")
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 22 * * SUN")
+    //@Scheduled(cron = "0 * * * * *")
     public void generateForAllUsers() {
         logger.info("=== 定时任务：开始为所有用户生成健康建议 ===");
 

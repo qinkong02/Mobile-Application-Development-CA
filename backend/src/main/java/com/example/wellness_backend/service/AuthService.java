@@ -7,7 +7,7 @@ import com.example.wellness_backend.entity.User;
 import com.example.wellness_backend.repository.UserRepository;
 import com.example.wellness_backend.utils.JwtUtils;
 import org.springframework.stereotype.Service;
-
+//Author:Mo Yundi
 @Service
 public class AuthService {
 

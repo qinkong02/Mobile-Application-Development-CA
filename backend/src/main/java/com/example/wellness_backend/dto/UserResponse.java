@@ -2,7 +2,10 @@ package com.example.wellness_backend.dto;
 
 /**
  * DTO for returning user information to frontend.
+ * @author Mo Yundi
  */
+
+
 public class UserResponse {
 
     private Long id;

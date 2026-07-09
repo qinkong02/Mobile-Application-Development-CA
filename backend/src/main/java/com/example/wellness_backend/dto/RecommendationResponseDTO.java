@@ -1,6 +1,9 @@
 package com.example.wellness_backend.dto;
 
 import java.time.LocalDateTime;
+/**
+ * @author Zhang Yuhao
+ */
 //返回给前端的agent建议
 public class RecommendationResponseDTO {
     private Long id;

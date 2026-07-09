@@ -1,5 +1,7 @@
 package com.example.wellness_backend.dto;
-
+/**
+ * @author XieMaonan
+ */
 public class ChatRequest {
     private String message;
 

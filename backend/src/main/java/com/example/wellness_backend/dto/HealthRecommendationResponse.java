@@ -1,7 +1,9 @@
 package com.example.wellness_backend.dto;
 
 import java.util.List;
-
+/**
+ * @author Zhang Yuhao
+ */
 public class HealthRecommendationResponse {
     private List<String> recommendations;
     private String summary;

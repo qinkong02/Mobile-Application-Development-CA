@@ -3,7 +3,7 @@ import com.example.wellness_backend.entity.Recommendation;
 import com.example.wellness_backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
-
+//Author:Zhang Yuhao
 public interface RecommendationRepository  extends JpaRepository<Recommendation, Long> {
 
     //时间降序查找用户所有建议记录

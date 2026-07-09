@@ -13,7 +13,7 @@ public class WellnessBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(WellnessBackendApplication.class, args);
     }
-
+    //Author:Zhang Yuhao
     @Bean
     public ChatClient chatClient(ChatClient.Builder builder) {
         return builder.build();

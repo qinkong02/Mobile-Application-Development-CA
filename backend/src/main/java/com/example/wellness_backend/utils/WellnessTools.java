@@ -1,4 +1,4 @@
-package com.example.wellness_backend.tool;
+package com.example.wellness_backend.utils;
 
 import com.example.wellness_backend.entity.User;
 import com.example.wellness_backend.entity.WellnessLog;

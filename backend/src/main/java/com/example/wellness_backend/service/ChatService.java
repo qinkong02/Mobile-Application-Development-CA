@@ -5,7 +5,7 @@ import com.example.wellness_backend.entity.ChatMessage;
 import com.example.wellness_backend.entity.User;
 import com.example.wellness_backend.repository.ChatMessageRepository;
 import com.example.wellness_backend.repository.UserRepository;
-import com.example.wellness_backend.tool.WellnessTools;
+import com.example.wellness_backend.utils.WellnessTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
