@@ -1,3 +1,6 @@
+/**
+ * @author ZhangMingchang
+ */
 package com.nusiss.wellness.data.model
 
 data class RecommendationItem(

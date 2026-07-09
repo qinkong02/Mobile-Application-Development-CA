@@ -1,3 +1,6 @@
+/**
+ * @author WengYuhao
+ */
 package com.nusiss.wellness
 
 import android.app.Application

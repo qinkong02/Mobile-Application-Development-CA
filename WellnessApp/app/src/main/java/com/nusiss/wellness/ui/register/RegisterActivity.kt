@@ -1,3 +1,6 @@
+/**
+ * @author WengYuhao
+ */
 package com.nusiss.wellness.ui.register
 
 import android.content.Intent

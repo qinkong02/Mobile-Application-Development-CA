@@ -1,3 +1,6 @@
+/**
+ * @author ZhangMingchang
+ */
 package com.nusiss.wellness.ui.main
 
 import android.os.Bundle

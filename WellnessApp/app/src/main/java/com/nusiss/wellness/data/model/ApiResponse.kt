@@ -1,3 +1,6 @@
+/**
+ * @author WengYuhao
+ */
 package com.nusiss.wellness.data.model
 
 data class ApiResponse<T>(
